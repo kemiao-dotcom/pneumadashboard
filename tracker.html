@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pneuma — Execution Tracker</title>
+<style>
+  :root {
+    --black:     #111111;
+    --dark:      #1a1a1a;
+    --charcoal:  #333333;
+    --lime:      #7ab800;
+    --lime-lt:   #96d400;
+    --white:     #ffffff;
+    --off-white: #f5f5f5;
+    --text-dark: #1a1a1a;
+    --text-mid:  #3a3a3a;
+    --text-muted:#7a7a7a;
+    --border:    #e8e8e8;
+    --green:     #2e7a5c;
+    --green-bg:  #f0faf5;
+    --green-bd:  #b0ddc8;
+    --amber:     #9a7a0a;
+    --amber-bg:  #fdf8e8;
+    --amber-bd:  #e0cc88;
+    --red:       #8b3050;
+    --red-bg:    #fdf0f5;
+    --red-bd:    #e0b0c0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--white); color: var(--text-dark); font-family: 'Times New Roman', Times, serif; font-size: 15px; line-height: 1.7; }
+
+  /* NAV — matches dashboard exactly */
+  nav { position: sticky; top: 0; z-index: 100; background: var(--black); display: flex; align-items: center; justify-content: space-between; padding: 0 52px; height: 58px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .nav-brand { font-size: 16px; font-weight: bold; color: var(--lime); letter-spacing: 0.04em; font-style: italic; }
+  .nav-right { display: flex; align-items: center; gap: 16px; }
+  .nav-back { color: rgba(255,255,255,0.45); text-decoration: none; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-back:hover { color: var(--lime); }
+  .nav-date { color: rgba(255,255,255,0.25); font-size: 11px; font-style: italic; }
+
+  /* HERO — same structure as dashboard hero */
+  .hero { background: linear-gradient(135deg, #0a0a0a 0%, #161616 50%, #1e1e1e 100%); padding: 72px 52px 60px; position: relative; overflow: hidden; }
+  .hero::after { content: ''; position: absolute; top: 0; right: 0; width: 50%; height: 100%; background: radial-gradient(ellipse 60% 70% at 85% 40%, rgba(122,184,0,0.07) 0%, transparent 70%); pointer-events: none; }
+  .hero-label { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--lime); margin-bottom: 18px; }
+  .hero-title { font-family: 'Times New Roman', Times, serif; font-size: clamp(32px, 4.5vw, 58px); font-weight: normal; font-style: italic; line-height: 1.1; color: white; margin-bottom: 10px; }
+  .hero-title strong { font-style: normal; font-weight: bold; color: var(--lime); }
+  .hero-sub { font-size: 15px; color: rgba(255,255,255,0.42); font-style: italic; max-width: 520px; line-height: 1.7; margin-bottom: 40px; border-left: 1px solid var(--lime); padding-left: 20px; }
+  .hero-counts { display: flex; gap: 0; border-top: 1px solid rgba(122,184,0,0.2); padding-top: 32px; }
+  .hc { flex: 1; padding-right: 28px; border-right: 1px solid rgba(255,255,255,0.06); margin-right: 28px; }
+  .hc:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+  .hc-val { font-family: 'Times New Roman', Times, serif; font-size: 38px; font-weight: bold; color: var(--lime); line-height: 1; margin-bottom: 4px; }
+  .hc-label { color: rgba(255,255,255,0.35); font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; }
+
+  /* FILTER BAR */
+  .filter-wrap { background: var(--off-white); border-bottom: 1px solid var(--border); padding: 18px 52px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .filter-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted); margin-right: 8px; }
+  .filter-btn { padding: 5px 16px; border: 1px solid var(--border); background: white; border-radius: 1px; font-family: 'Times New Roman', Times, serif; font-size: 12px; cursor: pointer; color: var(--text-muted); transition: all 0.18s; }
+  .filter-btn:hover { border-color: var(--charcoal); color: var(--text-dark); }
+  .filter-btn.active { background: var(--dark); color: white; border-color: var(--dark); }
+  .filter-btn.f-urgent.active  { background: var(--red);   border-color: var(--red); }
+  .filter-btn.f-inprog.active  { background: var(--amber); border-color: var(--amber); }
+  .filter-btn.f-next.active    { background: var(--charcoal); border-color: var(--charcoal); }
+  .filter-btn.f-done.active    { background: var(--green); border-color: var(--green); }
+
+  /* CONTENT */
+  .content { padding: 48px 52px; }
+
+  /* TRACKER SECTION */
+  .tracker-section { margin-bottom: 52px; }
+  .ts-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .ts-title { font-family: 'Times New Roman', Times, serif; font-size: 22px; font-weight: bold; }
+  .ts-eyebrow { font-size: 10px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--lime); margin-bottom: 6px; }
+  .ts-count { font-size: 12px; color: var(--text-muted); font-style: italic; }
+
+  /* TABLE */
+  .action-table { width: 100%; border-collapse: collapse; }
+  .action-table thead tr { background: var(--dark); }
+  .action-table th { padding: 11px 16px; text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.6); font-weight: normal; }
+  .action-table td { padding: 14px 16px; border-bottom: 1px solid #f0f0f0; vertical-align: top; background: white; }
+  .action-table tr:last-child td { border-bottom: none; }
+  .action-table tbody tr:hover td { background: #fafafa; }
+  .action-text { font-size: 13.5px; color: var(--text-mid); line-height: 1.6; }
+  .action-owner { font-size: 11px; font-weight: bold; color: var(--charcoal); white-space: nowrap; }
+  .action-due { font-size: 11px; color: var(--text-muted); font-style: italic; white-space: nowrap; }
+
+  /* STATUS PILLS */
+  .pill { display: inline-block; padding: 2px 10px; font-size: 10px; border-radius: 1px; border: 1px solid; white-space: nowrap; letter-spacing: 0.04em; }
+  .pill.urgent { background: var(--red-bg);   color: var(--red);   border-color: var(--red-bd); }
+  .pill.inprog  { background: var(--amber-bg); color: var(--amber); border-color: var(--amber-bd); }
+  .pill.done    { background: var(--green-bg); color: var(--green); border-color: var(--green-bd); }
+  .pill.next    { background: var(--off-white); color: var(--text-muted); border-color: var(--border); }
+
+  /* EYEBROW on section */
+  .eyebrow { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--lime); margin-bottom: 8px; }
+
+  /* FOOTER */
+  footer { background: var(--black); color: rgba(255,255,255,0.3); padding: 28px 52px; text-align: center; font-size: 11px; border-top: 1px solid rgba(255,255,255,0.06); font-style: italic; margin-top: 0; }
+  footer strong { color: var(--lime); font-style: normal; }
+  footer a { color: var(--lime); text-decoration: none; }
+
+  @media (max-width: 800px) {
+    nav { padding: 0 20px; }
+    .hero { padding: 48px 20px 40px; }
+    .hero-counts { flex-direction: column; gap: 20px; }
+    .hc { border-right: none; margin-right: 0; padding-right: 0; }
+    .filter-wrap, .content { padding-left: 20px; padding-right: 20px; }
+    .action-table th:nth-child(3), .action-table td:nth-child(3),
+    .action-table th:nth-child(4), .action-table td:nth-child(4) { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Pneuma Worship Collective</div>
+  <div class="nav-right">
+    <a href="index.html" class="nav-back">← Strategy Dashboard</a>
+    <span class="nav-date">June 2026</span>
+  </div>
+</nav>
+
+<div class="hero">
+  <p class="hero-label">Pneuma Worship Collective · Execution Tracker · June 2026</p>
+  <h1 class="hero-title"><strong>Execution</strong><br>Tracker</h1>
+  <p class="hero-sub">Owners, deadlines, and deliverables. The operational layer that supports the strategy. Strategy lives at the <a href="index.html" style="color:var(--lime);text-decoration:none;">Dashboard →</a></p>
+  <div class="hero-counts">
+    <div class="hc"><div class="hc-val">3</div><div class="hc-label">Urgent Items</div></div>
+    <div class="hc"><div class="hc-val">8</div><div class="hc-label">In Progress</div></div>
+    <div class="hc"><div class="hc-val">8</div><div class="hc-label">Queued Next</div></div>
+    <div class="hc"><div class="hc-val">10</div><div class="hc-label">Completed</div></div>
+  </div>
+</div>
+
+<div class="filter-wrap">
+  <span class="filter-label">Filter</span>
+  <button class="filter-btn active"        onclick="filterAll(this)">All</button>
+  <button class="filter-btn f-urgent"      onclick="filterBy('urgent', this)">🔴 Urgent</button>
+  <button class="filter-btn f-inprog"      onclick="filterBy('inprog', this)">⟳ In Progress</button>
+  <button class="filter-btn f-next"        onclick="filterBy('next', this)">◯ Next</button>
+  <button class="filter-btn f-done"        onclick="filterBy('done', this)">✓ Done</button>
+</div>
+
+<div class="content">
+
+  <!-- URGENT -->
+  <div class="tracker-section" id="sec-urgent">
+    <p class="eyebrow">Priority</p>
+    <div class="ts-header">
+      <h2 class="ts-title">Urgent — Before Album Drop (10 July)</h2>
+      <span class="ts-count">3 items</span>
+    </div>
+    <table class="action-table">
+      <thead><tr><th style="width:46%">Action</th><th style="width:16%">Owner</th><th style="width:13%">Due</th><th style="width:13%">Status</th></tr></thead>
+      <tbody>
+        <tr class="row-urgent"><td class="action-text">Build complete video release schedule for all album songs — Responsible Father, Worthy, For By Grace, Anchor, Victory Chant and remaining tracks. All dates locked before 10 July.</td><td class="action-owner">PMike</td><td class="action-due">Before 10 July</td><td><span class="pill urgent">Urgent</span></td></tr>
+        <tr class="row-urgent"><td class="action-text">Coordinate lyric videos for all album songs — available by each song's release date. Update DistroKid. Confirm lyrics synced across Spotify and Apple Music via Lyrics Blaster.</td><td class="action-owner">PMike + Opemipo</td><td class="action-due">Before 10 July</td><td><span class="pill urgent">Urgent</span></td></tr>
+        <tr class="row-urgent"><td class="action-text">Resolve finance path: appoint finance resource/owner for Pneuma. Clear Yanmife's outstanding half-month salary and David Richman's TOWDAH production fees. Move DistroKid to Pneuma account — off Tolu's personal card.</td><td class="action-owner">Kojo</td><td class="action-due">Immediately</td><td><span class="pill urgent">Urgent</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- IN PROGRESS -->
+  <div class="tracker-section" id="sec-inprog">
+    <p class="eyebrow">Active</p>
+    <div class="ts-header">
+      <h2 class="ts-title">In Progress</h2>
+      <span class="ts-count">8 items</span>
+    </div>
+    <table class="action-table">
+      <thead><tr><th style="width:46%">Action</th><th style="width:16%">Owner</th><th style="width:13%">Due</th><th style="width:13%">Status</th></tr></thead>
+      <tbody>
+        <tr class="row-inprog"><td class="action-text">Opemipo content calendar — weekly check-in with PMike confirmed. Content ownership and posting authority clarified. 2 videos + 1 carousel per week minimum cadence.</td><td class="action-owner">Opemipo + PMike</td><td class="action-due">Ongoing</td><td><span class="pill inprog">In Progress</span></td></tr>
+        <tr class="row-inprog"><td class="action-text">Send mastered audio for all 4 remaining backlog songs to Mr. AY — to match existing live video footage and enable release scheduling.</td><td class="action-owner">PMike</td><td class="action-due">ASAP</td><td><span class="pill inprog">In Progress</span></td></tr>
+        <tr class="row-inprog"><td class="action-text">First joint production session — Pipe + Mr. AY. Align on workflow, roles, and quality standard. No more working in silos.</td><td class="action-owner">Komi Lasisi</td><td class="action-due">July 2026</td><td><span class="pill inprog">In Progress</span></td></tr>
+        <tr class="row-inprog"><td class="action-text">Pneuma bank account setup + quarterly disbursement structure. Pre-approved quarterly budget pool established — no individual line-item approval per spend.</td><td class="action-owner">Kojo + PMike</td><td class="action-due">Q3 2026</td><td><span class="pill inprog">In Progress</span></td></tr>
+        <tr class="row-inprog"><td class="action-text">Song Story series filming — "Behind the Lyrics." Priority order: Abba's Beloved, Pleroo, Friend & Partner. Book Airbnb for comfortable non-church setting. Invite external co-writers.</td><td class="action-owner">Frances + PMike</td><td class="action-due">Q3 2026</td><td><span class="pill inprog">In Progress</span></td></tr>
+        <tr class="row-inprog"><td class="action-text">Post-Ignite content strategy with Opemipo — creator account (songwriting insights, theology of worship, why God is worthy). PMike + David Oguche + Exalted Jerry all contributing.</td><td class="action-owner">PMike + Opemipo</td><td class="action-due">July 2026</td><td><span class="pill inprog">In Progress</span></td></tr>
+        <tr class="row-inprog"><td class="action-text">Music business structure — royalties, IP ownership, distribution rights, legal support. Initial outline required before album drops.</td><td class="action-owner">Kemi + Komi Lasisi + Kojo</td><td class="action-due">Q3 2026</td><td><span class="pill inprog">In Progress</span></td></tr>
+        <tr class="row-inprog"><td class="action-text">Gbagada studio conversion — ongoing. Pipe + Mr. AY to confirm equipment list and timeline for operational readiness.</td><td class="action-owner">PMike + Pipe</td><td class="action-due">Q3 2026</td><td><span class="pill inprog">In Progress</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- NEXT -->
+  <div class="tracker-section" id="sec-next">
+    <p class="eyebrow">Queued</p>
+    <div class="ts-header">
+      <h2 class="ts-title">Next</h2>
+      <span class="ts-count">8 items</span>
+    </div>
+    <table class="action-table">
+      <thead><tr><th style="width:46%">Action</th><th style="width:16%">Owner</th><th style="width:13%">Timeline</th><th style="width:13%">Status</th></tr></thead>
+      <tbody>
+        <tr class="row-next"><td class="action-text">Album drop 10 July — full coordinated release campaign. Global Zoe watch party across all branches and online cells. Coordinate via Zainab and campus media heads.</td><td class="action-owner">Opemipo + PMike</td><td class="action-due">10 July 2026</td><td><span class="pill next">Next</span></td></tr>
+        <tr class="row-next"><td class="action-text">Amen Hallelujah premiere — stagger after Pleroo. Teaser Monday, full video Friday. Zoe-wide watch party coordinated.</td><td class="action-owner">Opemipo + PMike</td><td class="action-due">July 2026</td><td><span class="pill next">Next</span></td></tr>
+        <tr class="row-next"><td class="action-text">Song Compendium — lyrics, guitar + piano chords, scripture references, meaning and credits for all songs. Published publicly to support church adoption.</td><td class="action-owner">PMike + Frances</td><td class="action-due">Q3 2026</td><td><span class="pill next">Next</span></td></tr>
+        <tr class="row-next"><td class="action-text">Paid ad campaign launch — IG/FB at ₦5K/day, TikTok at ₦3K/day. US and UK region targeting for diaspora. Tied to album release dates and individual song drops.</td><td class="action-owner">Opemipo + Kojo</td><td class="action-due">July 2026</td><td><span class="pill next">Next</span></td></tr>
+        <tr class="row-next"><td class="action-text">Bring Uzo in for SEO and platform optimisation — YouTube titles and descriptions, Spotify profile, Apple Music, Google discoverability. Begin once Opemipo is fully settled.</td><td class="action-owner">Kemi</td><td class="action-due">Q3 2026</td><td><span class="pill next">Next</span></td></tr>
+        <tr class="row-next"><td class="action-text">TOWDAH Q3 planning — venue, budget pre-approved, David Richman leading production independently. Mailing list invitations sent 4 weeks in advance. Target: 300+ capacity.</td><td class="action-owner">PMike + Richman</td><td class="action-due">Sept 2026</td><td><span class="pill next">Next</span></td></tr>
+        <tr class="row-next"><td class="action-text">Merch next run — add S/M/L sizes (currently L/XL only). Maintain permanent stock for all events. Pricing review based on Ignite feedback.</td><td class="action-owner">Kojo + Sister Ara</td><td class="action-due">Q3 2026</td><td><span class="pill next">Next</span></td></tr>
+        <tr class="row-next"><td class="action-text">Full Pneuma team meeting — strategy + worship + media all in the same room. Roles, authority, and release calendar communicated to everyone. Komi Lasisi to convene.</td><td class="action-owner">Komi Lasisi</td><td class="action-due">July 2026</td><td><span class="pill next">Next</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- DONE -->
+  <div class="tracker-section" id="sec-done">
+    <p class="eyebrow">Complete</p>
+    <div class="ts-header">
+      <h2 class="ts-title">Completed</h2>
+      <span class="ts-count">10 items</span>
+    </div>
+    <table class="action-table">
+      <thead><tr><th style="width:46%">Action</th><th style="width:16%">Owner</th><th style="width:13%">Completed</th><th style="width:13%">Status</th></tr></thead>
+      <tbody>
+        <tr class="row-done"><td class="action-text">YouTube watch hours crossed 4,000 threshold — channel monetised and revenue generating.</td><td class="action-owner">PMike</td><td class="action-due">April 2026</td><td><span class="pill done">Done</span></td></tr>
+        <tr class="row-done"><td class="action-text">TOWDAH April 2026 — produced and sold out at 150 capacity. Mailing list built from Eventbrite. Post-event email sent to full list.</td><td class="action-owner">PMike + Team</td><td class="action-due">April 2026</td><td><span class="pill done">Done</span></td></tr>
+        <tr class="row-done"><td class="action-text">David Richman DP training and TOWDAH production handover — Richman now independently producing future events.</td><td class="action-owner">Mr. AY + Richman</td><td class="action-due">April 2026</td><td><span class="pill done">Done</span></td></tr>
+        <tr class="row-done"><td class="action-text">Pleroo music video completed by Mr. AY and Greenix (₦200K). Premiered with Zoe watch party.</td><td class="action-owner">Mr. AY + Greenix</td><td class="action-due">May 2026</td><td><span class="pill done">Done</span></td></tr>
+        <tr class="row-done"><td class="action-text">Amen Hallelujah music video completed and delivered by Mr. AY and Greenix (₦200K). Ready for premiere.</td><td class="action-owner">Mr. AY + Greenix</td><td class="action-due">May 2026</td><td><span class="pill done">Done</span></td></tr>
+        <tr class="row-done"><td class="action-text">Opemipo Akinmola hired as Social Media & Community Manager. Onboarded. Weekly check-in with PMike established.</td><td class="action-owner">Kemi + PMike</td><td class="action-due">May 2026</td><td><span class="pill done">Done</span></td></tr>
+        <tr class="row-done"><td class="action-text">Pipeloluwa (Pipe) joins as Creative Director + Producer. Led Ignite 2026 production successfully.</td><td class="action-owner">PMike</td><td class="action-due">May 2026</td><td><span class="pill done">Done</span></td></tr>
+        <tr class="row-done"><td class="action-text">Merch launched at Ignite 2026 — shirts, caps, bottles, mugs, totes. Shirts sold out. Hats popular. QR codes and promo video distributed to full Zoe community.</td><td class="action-owner">Kojo + Sister Ara</td><td class="action-due">May 2026</td><td><span class="pill done">Done</span></td></tr>
+        <tr class="row-done"><td class="action-text">Lyrics Blaster subscribed (₦15/year) — lyrics syncing across Spotify and Apple Music.</td><td class="action-owner">PMike</td><td class="action-due">June 2026</td><td><span class="pill done">Done</span></td></tr>
+        <tr class="row-done"><td class="action-text">Responsible Father music video released — 16 June 2026.</td><td class="action-owner">PMike + Mr. AY</td><td class="action-due">16 June 2026</td><td><span class="pill done">Done</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<footer>
+  <strong>Pneuma Worship Collective</strong> · Execution Tracker · June 2026 · Internal Use<br>
+  <span style="margin-top:6px;display:block;"><a href="index.html">← Back to Strategy Dashboard</a></span>
+</footer>
+
+<script>
+  function filterAll(btn) {
+    document.querySelectorAll('tr[class^="row-"]').forEach(r => r.style.display = '');
+    document.querySelectorAll('.tracker-section').forEach(s => s.style.display = '');
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  function filterBy(status, btn) {
+    document.querySelectorAll('tr[class^="row-"]').forEach(r => {
+      r.style.display = r.classList.contains('row-' + status) ? '' : 'none';
+    });
+    // hide empty sections
+    document.querySelectorAll('.tracker-section').forEach(s => {
+      const visible = s.querySelectorAll('tr.row-' + status);
+      s.style.display = visible.length ? '' : 'none';
+    });
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+</script>
+</body>
+</html>

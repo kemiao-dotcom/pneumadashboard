@@ -6,189 +6,248 @@
 <title>Pneuma Worship Collective — Strategy Dashboard</title>
 <style>
   :root {
-    --navy:      #1a1a1a;
-    --deep-blue: #111111;
-    --purple:    #2a2a2a;
-    --violet:    #333333;
-    --mauve:     #b8960c;
-    --lavender:  #c8c8c8;
+    --black:     #111111;
+    --dark:      #1a1a1a;
+    --mid:       #2a2a2a;
+    --charcoal:  #333333;
+    --gold:      #7ab800;
+    --gold-lt:   #96d400;
     --white:     #ffffff;
-    --off-white: #f8f7f4;
-    --light-bg:  #f2f0ec;
+    --off-white: #ffffff;
+    --light-bg:  #f5f5f5;
     --text-dark: #1a1a1a;
     --text-mid:  #3a3a3a;
     --text-muted:#7a7a7a;
-    --border:    #e0ddd8;
-    --sp: 60px 48px;
+    --border:    #e8e8e8;
+    --green:     #2e7a5c;
+    --green-bg:  #f0faf5;
+    --green-bd:  #b0ddc8;
+    --sp: 64px 52px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--off-white); color: var(--text-dark); font-family: 'Times New Roman', Times, serif; font-size: 15px; line-height: 1.65; }
+  body { background: var(--white); color: var(--text-dark); font-family: 'Times New Roman', Times, serif; font-size: 15px; line-height: 1.7; }
 
-  nav { position: sticky; top: 0; z-index: 100; background: var(--navy); display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 58px; border-bottom: 1px solid var(--violet); }
-  .nav-brand { font-size: 17px; font-weight: bold; color: var(--mauve); letter-spacing: 0.03em; font-style: italic; }
-  .nav-links { display: flex; gap: 24px; list-style: none; }
-  .nav-links a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 12px; letter-spacing: 0.07em; text-transform: uppercase; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--mauve); }
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 100; background: var(--black); display: flex; align-items: center; justify-content: space-between; padding: 0 52px; height: 58px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .nav-brand { font-size: 16px; font-weight: bold; color: var(--gold); letter-spacing: 0.04em; font-style: italic; }
+  .nav-links { display: flex; gap: 20px; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-right { display: flex; align-items: center; gap: 16px; }
   .nav-date { color: rgba(255,255,255,0.3); font-size: 11px; font-style: italic; }
+  .nav-tracker { background: var(--gold); color: var(--black); font-size: 11px; font-weight: bold; padding: 4px 12px; border-radius: 2px; text-decoration: none; letter-spacing: 0.06em; }
 
-  .hero { background: linear-gradient(135deg, #111111 0%, #1a1a1a 50%, #222222 100%); padding: 88px 48px 72px; position: relative; overflow: hidden; }
-  .hero::after { content: ''; position: absolute; top: 0; right: 0; width: 45%; height: 100%; background: radial-gradient(ellipse 70% 80% at 80% 50%, rgba(184,150,12,0.10) 0%, transparent 70%); pointer-events: none; }
-  .hero-eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mauve); margin-bottom: 18px; }
-  .hero-title { font-family: 'Times New Roman', Times, serif; font-size: clamp(40px, 6vw, 78px); font-weight: normal; font-style: italic; line-height: 1.05; color: white; max-width: 680px; margin-bottom: 22px; }
-  .hero-title span { color: var(--mauve); font-style: normal; }
-  .hero-tagline { color: rgba(255,255,255,0.58); font-size: 16px; max-width: 520px; line-height: 1.7; margin-bottom: 48px; font-style: italic; }
-  .hero-stats { display: flex; gap: 0; border-top: 1px solid rgba(184,150,12,0.25); padding-top: 36px; }
-  .hstat { flex: 1; padding-right: 28px; border-right: 1px solid rgba(255,255,255,0.08); margin-right: 28px; }
-  .hstat:last-child { border-right: none; margin-right: 0; }
-  .hstat-val { font-family: 'Times New Roman', Times, serif; font-size: 44px; font-weight: bold; color: var(--mauve); line-height: 1; margin-bottom: 5px; }
-  .hstat-label { color: rgba(255,255,255,0.4); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; }
+  /* HERO */
+  .hero { background: linear-gradient(135deg, #0a0a0a 0%, #161616 50%, #1e1e1e 100%); padding: 96px 52px 80px; position: relative; overflow: hidden; }
+  .hero::after { content: ''; position: absolute; top: 0; right: 0; width: 50%; height: 100%; background: radial-gradient(ellipse 60% 70% at 85% 40%, rgba(122,184,0,0.08) 0%, transparent 70%); pointer-events: none; }
+  .hero-label { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+  .hero-title { font-family: 'Times New Roman', Times, serif; font-size: clamp(36px, 5vw, 68px); font-weight: normal; font-style: italic; line-height: 1.08; color: white; max-width: 720px; margin-bottom: 8px; }
+  .hero-title strong { font-style: normal; font-weight: bold; color: var(--gold); }
+  .hero-sub { font-size: 16px; color: rgba(255,255,255,0.45); font-style: italic; margin-bottom: 16px; }
+  .hero-positioning { font-size: 14px; color: rgba(255,255,255,0.6); max-width: 560px; line-height: 1.75; margin-bottom: 52px; border-left: 2px solid var(--gold); padding-left: 20px; }
+  .hero-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid rgba(122,184,0,0.2); padding-top: 40px; }
+  .hm { padding-right: 32px; border-right: 1px solid rgba(255,255,255,0.07); margin-right: 32px; }
+  .hm:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+  .hm-val { font-family: 'Times New Roman', Times, serif; font-size: 42px; font-weight: bold; color: var(--gold); line-height: 1; margin-bottom: 6px; }
+  .hm-label { color: rgba(255,255,255,0.38); font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 2px; }
+  .hm-date { color: rgba(255,255,255,0.22); font-size: 10px; font-style: italic; }
 
+  /* SECTIONS */
   section { padding: var(--sp); }
-  section.alt { background: var(--light-bg); }
-  section.dark { background: var(--navy); color: white; }
-  .eyebrow { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--violet); margin-bottom: 10px; }
-  section.dark .eyebrow { color: var(--mauve); }
-  .sec-title { font-family: 'Times New Roman', Times, serif; font-size: 34px; font-weight: bold; line-height: 1.15; margin-bottom: 10px; }
+  section.alt { background: #ffffff; }
+  section.dark { background: var(--dark); color: white; }
+  .eyebrow { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  section.dark .eyebrow { color: var(--gold); }
+  .sec-title { font-family: 'Times New Roman', Times, serif; font-size: 32px; font-weight: bold; line-height: 1.15; margin-bottom: 10px; }
   section.dark .sec-title { color: white; }
-  .sec-sub { color: var(--text-muted); font-size: 14px; max-width: 560px; margin-bottom: 40px; font-style: italic; }
-  section.dark .sec-sub { color: rgba(255,255,255,0.45); }
+  .sec-sub { color: var(--text-muted); font-size: 14px; max-width: 600px; margin-bottom: 40px; font-style: italic; line-height: 1.7; }
+  section.dark .sec-sub { color: rgba(255,255,255,0.42); }
 
+  /* GRIDS */
   .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
   .g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
   .g4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
 
-  .card { background: white; border: 1px solid var(--border); border-radius: 3px; padding: 28px; }
-  .card-title { font-family: 'Times New Roman', Times, serif; font-size: 19px; font-weight: bold; margin-bottom: 12px; }
-  .card-body { color: var(--text-muted); font-size: 13.5px; line-height: 1.7; }
+  /* CARD */
+  .card { background: white; border: 1px solid #ebebeb; border-radius: 1px; padding: 28px; }
+  .card-title { font-family: 'Times New Roman', Times, serif; font-size: 18px; font-weight: bold; margin-bottom: 12px; }
+  .card-body { color: var(--text-muted); font-size: 13.5px; line-height: 1.75; }
 
-  .identity-block { display: grid; grid-template-columns: 1.25fr 1fr; gap: 52px; align-items: start; }
-  .big-quote { font-family: 'Times New Roman', Times, serif; font-size: 26px; font-style: italic; font-weight: normal; line-height: 1.45; color: var(--text-dark); border-left: 4px solid var(--violet); padding-left: 24px; margin-bottom: 28px; }
-  .identity-left p { color: var(--text-muted); font-size: 14px; line-height: 1.8; margin-bottom: 14px; }
+  /* WHO WE ARE */
+  .who-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+  .positioning-statement { font-family: 'Times New Roman', Times, serif; font-size: 22px; font-style: italic; line-height: 1.5; color: var(--text-dark); border-left: 1px solid var(--gold); padding-left: 24px; margin-bottom: 28px; }
+  .who-body p { color: var(--text-muted); font-size: 14px; line-height: 1.8; margin-bottom: 14px; }
+  .distinct-list { list-style: none; margin-top: 4px; }
+  .distinct-list li { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; font-size: 13.5px; color: var(--text-mid); }
+  .distinct-list li::before { content: '—'; color: var(--gold); flex-shrink: 0; margin-top: 1px; }
+  .who-right h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted); margin-bottom: 20px; }
   .timeline { list-style: none; }
   .tl-item { display: flex; gap: 18px; margin-bottom: 22px; align-items: flex-start; }
-  .tl-year { font-family: 'Times New Roman', Times, serif; font-size: 24px; font-weight: bold; color: var(--violet); min-width: 52px; line-height: 1; }
-  .tl-text { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+  .tl-year { font-family: 'Times New Roman', Times, serif; font-size: 22px; font-weight: bold; color: var(--charcoal); min-width: 48px; line-height: 1; }
+  .tl-text { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
 
-  .vision-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.07); }
-  .vg-step { background: var(--navy); padding: 36px 28px; }
-  .vg-num { font-family: 'Times New Roman', Times, serif; font-size: 52px; font-weight: bold; color: var(--purple); font-style: italic; line-height: 1; margin-bottom: 14px; }
-  .vg-label { font-size: 14px; font-weight: bold; color: white; margin-bottom: 10px; letter-spacing: 0.03em; }
-  .vg-body { color: rgba(255,255,255,0.48); font-size: 13px; line-height: 1.65; }
+  /* NON NEGOTIABLES STRIP */
+  .nonneg { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; background: var(--black); }
+  .nn-item { padding: 28px 24px; border-right: 1px solid rgba(255,255,255,0.04); }
+  .nn-item:last-child { border-right: none; }
+  .nn-label { font-size: 13px; font-weight: bold; color: white; margin-bottom: 6px; letter-spacing: 0.03em; }
+  .nn-body { font-size: 12px; color: rgba(255,255,255,0.42); line-height: 1.6; }
+  .nn-num { font-family: 'Times New Roman', Times, serif; font-size: 32px; color: rgba(122,184,0,0.25); font-style: italic; font-weight: bold; line-height: 1; margin-bottom: 10px; }
 
-  .stat-card { background: white; border: 1px solid var(--border); padding: 26px; border-radius: 3px; }
-  .stat-platform { font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted); margin-bottom: 12px; }
-  .stat-number { font-family: 'Times New Roman', Times, serif; font-size: 48px; font-weight: bold; color: var(--navy); line-height: 1; margin-bottom: 4px; }
-  .stat-label { font-size: 12px; color: var(--text-muted); margin-bottom: 14px; font-style: italic; }
-  .stat-bar { height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; margin-bottom: 8px; }
-  .stat-fill { height: 100%; background: var(--violet); border-radius: 2px; }
-  .stat-fill.green { background: #3d9e72; }
-  .stat-note { font-size: 11px; color: var(--text-muted); font-style: italic; }
-  .badge { display: inline-block; margin-top: 8px; padding: 2px 10px; font-size: 11px; border-radius: 2px; border: 1px solid; }
-  .badge.green { background: #f0faf5; color: #2e7a5c; border-color: #b0ddc8; }
-  .badge.purple { background: #f2f0ec; color: var(--purple); border-color: #c8c8c8; }
+  /* AMBITION */
+  .ambition-statement { font-family: 'Times New Roman', Times, serif; font-size: 20px; font-style: italic; line-height: 1.6; color: rgba(255,255,255,0.75); max-width: 680px; margin-bottom: 40px; border-left: 1px solid var(--gold); padding-left: 24px; }
+  .ambition-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.04); }
+  .amb-step { background: var(--dark); padding: 32px 26px; }
+  .amb-num { font-family: 'Times New Roman', Times, serif; font-size: 44px; font-weight: bold; color: rgba(122,184,0,0.3); font-style: italic; line-height: 1; margin-bottom: 14px; }
+  .amb-label { font-size: 13px; font-weight: bold; color: white; margin-bottom: 8px; }
+  .amb-body { color: rgba(255,255,255,0.44); font-size: 13px; line-height: 1.65; }
 
-  .ch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .ch-card { border: 1px solid var(--border); border-radius: 3px; padding: 28px; border-left: 4px solid var(--mauve); }
-  .ch-icon { font-size: 24px; margin-bottom: 12px; }
-  .ch-title { font-family: 'Times New Roman', Times, serif; font-size: 19px; font-weight: bold; margin-bottom: 8px; }
-  .ch-body { color: var(--text-muted); font-size: 13px; line-height: 1.7; }
+  /* METRICS */
+  .metric-card { background: white; border: 1px solid var(--border); padding: 24px; border-radius: 2px; }
+  .mc-platform { font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted); margin-bottom: 10px; }
+  .mc-number { font-family: 'Times New Roman', Times, serif; font-size: 44px; font-weight: bold; color: var(--dark); line-height: 1; margin-bottom: 3px; }
+  .mc-label { font-size: 12px; color: var(--text-muted); margin-bottom: 12px; font-style: italic; }
+  .mc-bar { height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; margin-bottom: 8px; }
+  .mc-fill { height: 100%; background: var(--charcoal); border-radius: 2px; }
+  .mc-fill.g { background: var(--green); }
+  .mc-note { font-size: 11px; color: var(--text-muted); font-style: italic; }
+  .mc-date { font-size: 10px; color: rgba(122,184,0,0.9); margin-top: 6px; font-style: italic; }
+  .badge { display: inline-block; margin-top: 6px; padding: 2px 9px; font-size: 10px; border-radius: 2px; border: 1px solid; }
+  .badge.g { background: var(--green-bg); color: var(--green); border-color: var(--green-bd); }
+  .badge.n { background: #ffffff; color: var(--text-muted); border-color: var(--border); }
 
-  .pillar-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--border); border-radius: 3px; overflow: hidden; }
-  .pillar { padding: 32px 22px; border-right: 1px solid var(--border); background: white; }
+  /* DATA INSIGHT */
+  .insight-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+  .insight-list { list-style: none; }
+  .insight-list li { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid var(--border); font-size: 13.5px; color: var(--text-mid); line-height: 1.6; }
+  .insight-list li:last-child { border-bottom: none; }
+  .insight-list li span.bullet { color: var(--gold); font-size: 18px; line-height: 1; flex-shrink: 0; margin-top: 1px; }
+  .insight-bridge { background: var(--dark); color: white; padding: 24px 28px; border-radius: 2px; font-family: 'Times New Roman', Times, serif; font-size: 18px; font-style: italic; line-height: 1.6; border-left: 1px solid var(--gold); }
+
+  /* GAPS */
+  .gap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .gap-card { border: 1px solid var(--border); border-radius: 2px; padding: 26px; border-left: 1px solid var(--gold); background: white; }
+  .gap-label { font-size: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 8px; }
+  .gap-title { font-family: 'Times New Roman', Times, serif; font-size: 18px; font-weight: bold; margin-bottom: 10px; }
+  .gap-body { color: var(--text-muted); font-size: 13px; line-height: 1.7; }
+  .gap-bridge { grid-column: 1 / -1; background: var(--dark); color: white; padding: 22px 28px; border-radius: 2px; font-style: italic; font-size: 15px; text-align: center; }
+
+  /* PILLARS */
+  .pillar-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid #ebebeb; border-radius: 1px; overflow: hidden; }
+  .pillar { padding: 30px 22px; border-right: 1px solid var(--border); background: white; }
   .pillar:last-child { border-right: none; }
-  .pillar-num { font-family: 'Times New Roman', Times, serif; font-size: 54px; font-weight: bold; font-style: italic; color: #c8c8c8; line-height: 1; margin-bottom: 14px; }
-  .pillar-title { font-size: 12px; font-weight: bold; letter-spacing: 0.07em; margin-bottom: 10px; text-transform: uppercase; color: var(--purple); }
-  .pillar-body { color: var(--text-muted); font-size: 13px; line-height: 1.65; }
+  .pillar-num { font-family: 'Times New Roman', Times, serif; font-size: 48px; font-weight: bold; font-style: italic; color: #d8d4ce; line-height: 1; margin-bottom: 12px; }
+  .pillar-title { font-size: 12px; font-weight: bold; letter-spacing: 0.07em; margin-bottom: 10px; text-transform: uppercase; color: var(--charcoal); }
+  .pillar-body { color: var(--text-muted); font-size: 12.5px; line-height: 1.65; }
+  .pillar-items { list-style: none; margin-top: 10px; }
+  .pillar-items li { font-size: 11.5px; color: var(--text-muted); padding: 4px 0; border-bottom: 1px solid #f0f0f0; }
+  .pillar-items li:last-child { border-bottom: none; }
 
-  .strategy-item { display: grid; grid-template-columns: 56px 1fr; gap: 22px; align-items: start; padding: 28px 0; border-bottom: 1px solid var(--border); }
-  .strategy-item:last-child { border-bottom: none; }
-  .si-icon { width: 48px; height: 48px; background: var(--light-bg); border: 1px solid var(--border); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
-  .si-title { font-family: 'Times New Roman', Times, serif; font-size: 21px; font-weight: bold; margin-bottom: 7px; }
-  .si-body { color: var(--text-muted); font-size: 13.5px; line-height: 1.7; }
-  .si-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
-  .tag { background: var(--light-bg); border: 1px solid var(--border); padding: 2px 10px; font-size: 11px; color: var(--text-muted); border-radius: 2px; }
+  /* STRATEGY CHOICES */
+  .choices-block { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .choice-col { background: white; border: 1px solid #ebebeb; border-radius: 1px; padding: 28px; }
+  .choice-col.will { border-top: 1px solid rgba(255,255,255,0.06); }
+  .choice-col.wont { border-top: 1px solid var(--border); }
+  .choice-heading { font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 18px; }
+  .choice-col.will .choice-heading { color: var(--dark); }
+  .choice-col.wont .choice-heading { color: var(--text-muted); }
+  .choice-list { list-style: none; }
+  .choice-list li { font-size: 13.5px; color: var(--text-mid); padding: 10px 0; border-bottom: 1px solid var(--border); display: flex; gap: 12px; align-items: flex-start; line-height: 1.55; }
+  .choice-list li:last-child { border-bottom: none; }
+  .choice-list li span { flex-shrink: 0; font-weight: bold; }
+  .choice-col.will .choice-list li span { color: var(--dark); }
+  .choice-col.wont .choice-list li span { color: #ccc; }
 
-  .qw-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-  .qw-item { background: white; border: 1px solid var(--border); padding: 18px 20px; border-radius: 3px; display: flex; gap: 13px; align-items: flex-start; }
-  .qw-check { width: 22px; height: 22px; border-radius: 50%; background: var(--violet); color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; margin-top: 2px; }
-  .qw-check.pending { background: var(--border); color: var(--text-muted); }
-  .qw-text { font-size: 13px; color: var(--text-mid); line-height: 1.55; }
+  /* PROGRESS */
+  .progress-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .prog-col { background: white; border: 1px solid #ebebeb; border-radius: 1px; padding: 24px; }
+  .prog-heading { font-size: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  .prog-heading.done { border-color: var(--green); color: var(--green); }
+  .prog-heading.inprog { border-color: var(--gold); color: #9a7a0a; }
+  .prog-heading.next { border-color: var(--charcoal); color: var(--charcoal); }
+  .prog-list { list-style: none; }
+  .prog-list li { font-size: 13px; color: var(--text-mid); padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; gap: 10px; align-items: flex-start; line-height: 1.5; }
+  .prog-list li:last-child { border-bottom: none; }
+  .prog-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+  .prog-dot.done { background: var(--green); }
+  .prog-dot.inprog { background: var(--gold); }
+  .prog-dot.next { background: var(--border); border: 1.5px solid var(--charcoal); }
 
-  .rm-header { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--violet); border-radius: 3px 3px 0 0; overflow: hidden; }
-  .rm-phase { background: var(--navy); padding: 18px 24px; }
-  .rm-phase-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--mauve); }
-  .rm-phase-title { color: white; font-size: 14px; font-weight: bold; margin-top: 5px; }
-  .rm-cols { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--border); border-radius: 0 0 3px 3px; overflow: hidden; }
-  .rm-col { background: white; padding: 24px; }
-  .rm-item { display: flex; gap: 10px; margin-bottom: 13px; align-items: flex-start; }
-  .rm-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--violet); flex-shrink: 0; margin-top: 5px; }
-  .rm-dot.future { background: var(--border); border: 1.5px solid var(--text-muted); }
-  .rm-item-text { font-size: 12.5px; color: var(--text-mid); line-height: 1.55; }
+  /* ROADMAP */
+  .roadmap { border: 1px solid #ebebeb; border-radius: 1px; overflow: hidden; }
+  .rm-head { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #e8e8e8; }
+  .rm-phase { background: var(--dark); padding: 20px 24px; }
+  .rm-phase-period { font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 4px; }
+  .rm-phase-title { color: white; font-size: 14px; font-weight: bold; }
+  .rm-phase-outcome { color: rgba(255,255,255,0.38); font-size: 11px; margin-top: 6px; font-style: italic; }
+  .rm-body { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #ebebeb; }
+  .rm-col { background: white; padding: 22px; }
+  .rm-item { display: flex; gap: 10px; margin-bottom: 11px; align-items: flex-start; }
+  .rm-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--charcoal); flex-shrink: 0; margin-top: 5px; }
+  .rm-dot.f { background: var(--border); border: 1.5px solid var(--text-muted); }
+  .rm-text { font-size: 12.5px; color: var(--text-mid); line-height: 1.5; }
+  .rm-outcome { background: #ffffff; padding: 14px 20px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-muted); font-style: italic; }
 
-  .bb-item { margin-bottom: 20px; }
-  .bb-header { display: flex; justify-content: space-between; margin-bottom: 6px; }
-  .bb-label { font-size: 13.5px; font-weight: bold; }
-  .bb-val { font-size: 13px; color: var(--text-muted); font-style: italic; }
-  .bb-track { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
-  .bb-fill { height: 100%; border-radius: 3px; background: var(--violet); }
-  .budget-note { background: #f5f3ee; border: 1px solid #c8c8c8; padding: 20px 24px; border-radius: 3px; font-size: 13px; color: var(--text-mid); line-height: 1.7; margin-top: 24px; }
-  .budget-note strong { color: var(--purple); }
+  /* KPIs */
+  .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .kpi-card { background: white; border: 1px solid #ebebeb; border-radius: 1px; padding: 24px; }
+  .kpi-platform { font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted); margin-bottom: 10px; }
+  .kpi-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .kpi-row:last-child { border-bottom: none; }
+  .kpi-metric { color: var(--text-muted); }
+  .kpi-target { font-weight: bold; color: var(--dark); font-family: 'Times New Roman', Times, serif; }
 
-  /* TOWDAH BUDGET TABLE */
-  .budget-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 16px; }
-  .budget-table th { background: var(--navy); color: white; padding: 10px 14px; text-align: left; font-weight: bold; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; }
-  .budget-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text-mid); }
-  .budget-table tr:last-child td { border-bottom: none; font-weight: bold; color: var(--navy); }
-  .budget-table tr:nth-child(even) td { background: var(--off-white); }
+  /* BUDGET */
+  .budget-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+  .budget-bucket { background: white; border: 1px solid #ebebeb; border-radius: 1px; padding: 24px; }
+  .bb-label { font-size: 12px; font-weight: bold; color: var(--dark); margin-bottom: 6px; }
+  .bb-desc { font-size: 12px; color: var(--text-muted); margin-bottom: 14px; line-height: 1.5; }
+  .bb-track { height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; margin-bottom: 6px; }
+  .bb-fill { height: 100%; border-radius: 3px; background: var(--charcoal); }
+  .bb-status { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; }
+  .bb-status.approved { color: var(--green); }
+  .bb-status.requested { color: #9a7a0a; }
+  .budget-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .budget-table th { background: var(--dark); color: white; padding: 10px 14px; text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; }
+  .budget-table td { padding: 10px 14px; border-bottom: 1px solid #f0f0f0; color: var(--text-mid); }
+  .budget-table tr:last-child td { font-weight: bold; color: var(--dark); border-bottom: none; }
+  .budget-table tr:nth-child(even) td { background: var(--white); }
 
-  /* AD RATES TABLE */
-  .rates-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 8px; }
-  .rate-card { background: white; border: 1px solid var(--border); padding: 18px 20px; border-radius: 3px; text-align: center; }
-  .rate-platform { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 6px; }
-  .rate-val { font-family: 'Times New Roman', Times, serif; font-size: 28px; font-weight: bold; color: var(--navy); margin-bottom: 2px; }
-  .rate-sub { font-size: 11px; color: var(--text-muted); font-style: italic; }
+  /* LEADERSHIP DECISIONS */
+  .decision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .decision-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-left: 1px solid var(--gold); border-radius: 2px; padding: 22px; }
+  .decision-num { font-size: 10px; color: var(--gold); font-weight: bold; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 8px; }
+  .decision-title { font-size: 14px; font-weight: bold; color: white; margin-bottom: 8px; }
+  .decision-body { font-size: 12.5px; color: rgba(255,255,255,0.45); line-height: 1.65; }
 
-  /* MERCH */
-  .merch-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
-  .merch-card { background: white; border: 1px solid var(--border); padding: 18px; border-radius: 3px; text-align: center; }
-  .merch-icon { font-size: 28px; margin-bottom: 8px; }
-  .merch-item { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
-  .merch-price { font-family: 'Times New Roman', Times, serif; font-size: 20px; color: var(--violet); font-weight: bold; }
-
-  .la-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .la-card { border: 1px solid var(--border); padding: 26px; border-radius: 3px; border-top: 4px solid var(--violet); background: white; }
-  .la-icon { font-size: 26px; margin-bottom: 12px; }
-  .la-title { font-size: 14px; font-weight: bold; margin-bottom: 8px; }
-  .la-body { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
-
-  /* OPEN ACTION ITEMS */
-  .actions-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .action-item { background: white; border: 1px solid var(--border); border-left: 3px solid var(--violet); padding: 14px 18px; border-radius: 0 3px 3px 0; }
-  .action-owner { font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--violet); margin-bottom: 4px; font-weight: bold; }
-  .action-text { font-size: 13px; color: var(--text-mid); line-height: 1.5; }
-  .action-item.urgent { border-left-color: var(--mauve); }
-  .action-item.urgent .action-owner { color: #9a4060; }
-
+  /* TEAM */
   .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-  .tm-card { background: white; border: 1px solid var(--border); padding: 22px; border-radius: 3px; text-align: center; }
-  .tm-avatar { width: 50px; height: 50px; border-radius: 50%; background: var(--navy); color: var(--mauve); font-family: 'Times New Roman', Times, serif; font-size: 18px; font-style: italic; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
-  .tm-name { font-size: 13px; font-weight: bold; margin-bottom: 3px; }
+  .tm-card { background: white; border: 1px solid var(--border); padding: 20px; border-radius: 2px; text-align: center; }
+  .tm-av { width: 46px; height: 46px; border-radius: 50%; background: var(--dark); color: var(--gold); font-family: 'Times New Roman', Times, serif; font-size: 16px; font-style: italic; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; }
+  .tm-name { font-size: 13px; font-weight: bold; margin-bottom: 2px; }
   .tm-role { font-size: 11px; color: var(--text-muted); line-height: 1.4; font-style: italic; }
-  .tm-badge { display: inline-block; margin-top: 7px; background: var(--light-bg); border: 1px solid var(--border); padding: 1px 8px; font-size: 10px; color: var(--text-muted); border-radius: 2px; }
-  .tm-badge.new { background: #f0faf5; border-color: #b0ddc8; color: #2e7a5c; }
+  .tm-badge { display: inline-block; margin-top: 6px; background: #ffffff; border: 1px solid var(--border); padding: 1px 8px; font-size: 10px; color: var(--text-muted); border-radius: 2px; }
+  .tm-badge.new { background: var(--green-bg); border-color: var(--green-bd); color: var(--green); }
   .tm-badge.open { background: #fdf0f5; border-color: #e0b0c0; color: #8b3050; }
+  .tm-badge.lead { background: #faf5e8; border-color: #e0cc88; color: #7a6010; }
 
-  footer { background: var(--navy); color: rgba(255,255,255,0.38); padding: 32px 48px; text-align: center; font-size: 12px; border-top: 1px solid var(--violet); font-style: italic; }
-  footer strong { color: var(--mauve); font-style: normal; }
+  footer { background: var(--black); color: rgba(255,255,255,0.3); padding: 28px 52px; text-align: center; font-size: 11px; border-top: 1px solid rgba(255,255,255,0.06); font-style: italic; }
+  footer strong { color: var(--gold); font-style: normal; }
+  footer a { color: var(--gold); text-decoration: none; }
 
-  @media (max-width: 880px) {
+  /* DIVIDER */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 36px 0; }
+
+  @media (max-width: 900px) {
     :root { --sp: 40px 22px; }
     nav { padding: 0 22px; } .nav-links { display: none; }
-    .hero { padding: 48px 22px; }
-    .hero-stats { flex-direction: column; gap: 22px; }
-    .hstat { border-right: none; padding-right: 0; margin-right: 0; }
-    .g2,.g3,.g4,.ch-grid,.qw-list,.pillar-row,.vision-grid,.rm-header,.rm-cols,.la-grid,.team-grid,.identity-block,.rates-row,.merch-grid,.actions-list { grid-template-columns: 1fr !important; }
+    .hero { padding: 52px 22px 44px; }
+    .hero-metrics { grid-template-columns: 1fr 1fr; gap: 24px; }
+    .hm { border-right: none; margin-right: 0; padding-right: 0; }
+    .g2,.g3,.g4,.gap-grid,.progress-grid,.kpi-grid,.budget-grid,.decision-grid,.team-grid,.who-grid,.choices-block,.ambition-grid,.nonneg,.pillar-grid,.rm-head,.rm-body { grid-template-columns: 1fr !important; }
     .pillar { border-right: none; border-bottom: 1px solid var(--border); }
+    .nn-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .gap-bridge { grid-column: 1; }
   }
 </style>
 </head>
@@ -197,458 +256,569 @@
 <nav>
   <div class="nav-brand">Pneuma Worship Collective</div>
   <ul class="nav-links">
-    <li><a href="#who">Who We Are</a></li>
-    <li><a href="#growth">Stats</a></li>
+    <li><a href="#who">Identity</a></li>
+    <li><a href="#ambition">Ambition</a></li>
+    <li><a href="#metrics">Metrics</a></li>
     <li><a href="#strategy">Strategy</a></li>
-    <li><a href="#budget">Budget</a></li>
-    <li><a href="#actions">Actions</a></li>
-    <li><a href="#team">Team</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#budget">Investment</a></li>
+    <li><a href="#decisions">Decisions</a></li>
   </ul>
-  <span class="nav-date">June 2026 · Internal Strategy Dashboard</span>
+  <div class="nav-right">
+    <span class="nav-date">June 2026</span>
+    <a href="tracker.html" class="nav-tracker">→ Execution Tracker</a>
+  </div>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
-  <p class="hero-eyebrow">Strategy Dashboard · Pneuma Worship Collective · June 2026</p>
-  <h1 class="hero-title">Soaring on the Wings of<br>the <span>Word and Worship</span></h1>
-  <p class="hero-tagline">From Lagos to the world — building the definitive contemporary Christian worship network for Nigeria, Africa, and the diaspora.</p>
-  <div class="hero-stats">
-    <div class="hstat">
-      <div class="hstat-val">12K</div>
-      <div class="hstat-label">Instagram Followers</div>
-    </div>
-    <div class="hstat">
-      <div class="hstat-val">1,500+</div>
-      <div class="hstat-label">YouTube Subscribers · Monetised</div>
-    </div>
-    <div class="hstat">
-      <div class="hstat-val">✓ Live</div>
-      <div class="hstat-label">YouTube Monetised</div>
-    </div>
-    <div class="hstat">
-      <div class="hstat-val">~20K</div>
-      <div class="hstat-label">Spotify Monthly Listeners</div>
-    </div>
-    <div class="hstat">
-      <div class="hstat-val">150</div>
-      <div class="hstat-label">TOWDAH Sold Out</div>
-    </div>
-  </div>
+  <p class="hero-label">Pneuma Worship Collective · Internal Strategy Dashboard · June 2026</p>
+  <h1 class="hero-title"><strong>12-Month</strong><br>Growth Strategy</h1>
+  <p class="hero-sub">Contemporary Christian Music for the Church — from Nigeria to the World</p>
+  <p class="hero-positioning">A Word-rooted worship collective building a trusted Nigerian and CCM sound for the global Church.</p>
+  
 </div>
 
 <!-- 01 WHO WE ARE -->
 <section id="who">
   <p class="eyebrow">01 · Identity</p>
   <h2 class="sec-title">Who We Are</h2>
-  <p class="sec-sub">A worship ministry that integrates scripture, melody, and encounter — production always in service of the Spirit, never performance.</p>
-  <div class="identity-block">
-    <div class="identity-left">
-      <div class="big-quote">"Worship is beyond songs and melodies. We see what we sing."</div>
-      <p>Pneuma Worship Collective is the worship music expression of Zoe Household Global, led by Pastor Dolapo Lawal. Based in Lagos (Yaba and Ikeja branches), Atlanta, and Houston, with active presence in Abeokuta and London.</p>
-      <p>We produce live worship recordings and original contemporary Christian music that integrates scripture and theology with congregational worship. Every song is a theological statement. Every production decision serves encounter.</p>
-      <p>We are not just a worship team. We are building the creative nerve centre for Nigerian and African worship — songs that congregations adopt, content that reaches diaspora believers, and events that create culture.</p>
+  <p class="sec-sub">Before strategy, vision. Before vision, foundation.</p>
+  <div class="who-grid">
+    <div class="who-body">
+      <div class="positioning-statement">"Pneuma Worship Collective creates Spirit-led, Word-rooted worship music that carries the sound of the African Church to worshippers globally."</div>
+      <p>We are the worship music expression of Zoe Household Global, led by Pastor Dolapo Lawal. A collective, not a solo act — rooted in Lagos (Yaba and Ikeja), with church locations in Atlanta and Houston, and active presence in Abeokuta and London.</p>
+      <p>We produce original, live, Word-centred worship music. Every song is a theological statement. Every production decision serves encounter, not performance. We write from revelation — and we see what we sing.</p>
+      <h4 style="font-size:11px;text-transform:uppercase;letter-spacing:0.14em;color:var(--text-muted);margin:24px 0 12px;">What Makes Us Distinct</h4>
+      <ul class="distinct-list">
+        <li>Theological depth woven into melody — not decoration, revelation</li>
+        <li>Live worship atmosphere that translates on record and on screen</li>
+        <li>Collective leadership — multiple voices, one sound</li>
+        <li>Song-birthing stories that build listener connection and adoption</li>
+        <li>Nigeria-rooted, globally accessible sound in the CCM tradition</li>
+      </ul>
     </div>
-    <div>
+    <div class="who-right">
+      <h4>Our Story</h4>
       <ul class="timeline">
-        <li class="tl-item"><span class="tl-year">2020</span><span class="tl-text">Jubilee Choir begins writing and recording original songs intentionally. Vision shifts from congregational service to original worship output.</span></li>
-        <li class="tl-item"><span class="tl-year">2024</span><span class="tl-text">Rebranded as Pneuma Worship Collective. Debut live album <em>Pneuma (Live)</em> released. Singles <em>Amen Hallelujah</em> and <em>Abba's Beloved</em> drop.</span></li>
-        <li class="tl-item"><span class="tl-year">2025</span><span class="tl-text"><em>Inhabit</em> released. Gbagada studio conversion begins. Strategy team formalises with cross-continent membership (Jan 2026).</span></li>
-        <li class="tl-item"><span class="tl-year">2026</span><span class="tl-text"><em>Gathering of Believers</em> + <em>Responsible Father</em> video released. First TOWDAH sells out at 100. Opemipo + Pipe join team. <em>Pleroo</em> and <em>Amen Hallelujah</em> videos ready. Album drops <strong>10 July 2026</strong>.</span></li>
+        <li class="tl-item"><span class="tl-year">2020</span><span class="tl-text">Jubilee Choir begins intentional original songwriting. Vision shifts from congregational service to original worship output.</span></li>
+        <li class="tl-item"><span class="tl-year">2024</span><span class="tl-text">Rebranded as Pneuma Worship Collective. Debut live album <em>Pneuma (Live)</em> released. <em>Amen Hallelujah</em> and <em>Abba's Beloved</em> drop as singles.</span></li>
+        <li class="tl-item"><span class="tl-year">2025</span><span class="tl-text"><em>Inhabit</em> released. Gbagada studio conversion begins. Strategy team formalises with cross-continent membership.</span></li>
+        <li class="tl-item"><span class="tl-year">2026</span><span class="tl-text"><em>Gathering of Believers</em> and <em>Responsible Father</em> released. First TOWDAH sells out. Opemipo and Pipe join. Album drops <strong>10 July 2026</strong>.</span></li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- 02 VISION -->
-<section class="dark">
-  <p class="eyebrow">02 · Vision & Value Proposition</p>
-  <h2 class="sec-title">The CCN for Nigeria, Africa & the World</h2>
-  <p class="sec-sub">We are a worship team — and more. Positioning Pneuma as the Creative Christian Network: the hub where the global African church worships, discovers, and belongs.</p>
-  <div class="vision-grid">
-    <div class="vg-step">
-      <div class="vg-num">I</div>
-      <div class="vg-label">Grow Our Home Base</div>
-      <div class="vg-body">Serve the Zoe Household community deeply. Sing every Sunday. Fill every seat at TOWDAH. Turn the congregation into our most loyal fanbase. Every Zoe campus and online cell as an amplifier.</div>
+<!-- NON-NEGOTIABLES STRIP -->
+<div class="nonneg">
+  <div class="nn-item"><div class="nn-num">I</div><div class="nn-label">Word-Rooted</div><div class="nn-body">Every song passes through scripture. Theology is not background — it is the song.</div></div>
+  <div class="nn-item"><div class="nn-num">II</div><div class="nn-label">Spirit-Led</div><div class="nn-body">Production serves encounter. Excellence exists so nothing stands between the listener and the presence of God.</div></div>
+  <div class="nn-item"><div class="nn-num">III</div><div class="nn-label">Excellent</div><div class="nn-body">Sound, visuals, packaging, and platform presence must reflect the weight of what we carry.</div></div>
+  <div class="nn-item"><div class="nn-num">IV</div><div class="nn-label">Community-Centred</div><div class="nn-body">We grow by building belonging. Zoe is our home base. The global Church is our horizon.</div></div>
+</div>
+
+<!-- 02 AMBITION -->
+<section id="ambition" class="dark">
+  <p class="eyebrow">02 · Our 12-Month Ambition</p>
+  <h2 class="sec-title">Building a Defining CCM Sound</h2>
+  <p class="ambition-statement">Over the next 12 months, Pneuma will strengthen its Nigerian home base, deepen diaspora engagement, and establish a repeatable engine for excellent worship releases and community adoption.</p>
+  <div class="ambition-grid">
+    <div class="amb-step">
+      <div class="amb-num">I</div>
+      <div class="amb-label">Strengthen the Home Base</div>
+      <div class="amb-body">Every Zoe campus singing Pneuma. Every Sunday reinforcing adoption. TOWDAH as a quarterly cultural moment. The congregation as our most loyal amplifier and distribution network.</div>
     </div>
-    <div class="vg-step">
-      <div class="vg-num">II</div>
-      <div class="vg-label">The CCN for Nigeria & Africa</div>
-      <div class="vg-body">Become the defining contemporary worship voice for Nigeria and Africa. Songs adopted beyond Zoe. Lyrics everywhere. Streams from every city. The name worship leaders reach for.</div>
+    <div class="amb-step">
+      <div class="amb-num">II</div>
+      <div class="amb-body" style="color:rgba(255,255,255,0.44);font-size:13px;line-height:1.65;">
+      <div style="font-size:13px;font-weight:bold;color:white;margin-bottom:8px;">Deepen Diaspora Engagement</div>
+      Atlanta, Houston, and London are not just locations — they are high-value streaming markets. Every Zoe branch abroad is an amplifier. Diaspora-targeted ads, Zoe ATL cross-promotion, and eventually TOWDAH nights on their soil.</div>
     </div>
-    <div class="vg-step">
-      <div class="vg-num">III</div>
-      <div class="vg-label">Worldwide Worship Influence</div>
-      <div class="vg-body">Diaspora worship nights in Atlanta, Houston, London. Label conversations with Integrity Music. Songs that travel with believers wherever they go. Pneuma as a global worship brand.</div>
+    <div class="amb-step">
+      <div class="amb-num">III</div>
+      <div class="amb-label">Build the Release Engine</div>
+      <div class="amb-body">A consistent, documented, repeatable system for releasing worship content — video, audio, lyrics, song stories — that does not depend on any single person and does not stop between albums.</div>
     </div>
   </div>
 </section>
 
-<!-- 03 GROWTH STATS -->
-<section id="growth" class="alt">
-  <p class="eyebrow">03 · Growth & Platform Stats</p>
-  <h2 class="sec-title">Where We Are</h2>
-  <p class="sec-sub">Real numbers from the team — Jan to June 2026. Spotify jumped from under 10K to ~20K in a single week during ad campaigns. YouTube watch hours crossed the 4K monetisation threshold by April.</p>
+<!-- 03 METRICS -->
+<section id="metrics" class="alt">
+  <p class="eyebrow">03 · Where We Are Today</p>
+  <h2 class="sec-title">Current Performance</h2>
+  <p class="sec-sub">All figures as of June 2026. Every metric is labelled precisely — we do not mix streams, listeners, watch hours, or subscribers.</p>
 
   <div class="g4" style="margin-bottom:28px;">
-    <div class="stat-card">
-      <div class="stat-platform">Instagram</div>
-      <div class="stat-number">12K</div>
-      <div class="stat-label">Followers · 164 posts</div>
-      <div class="stat-bar"><div class="stat-fill" style="width:60%"></div></div>
-      <div class="stat-note">Target: 50K. Verification + profile update in progress. Short-form content driving growth.</div>
+    <div class="metric-card">
+      <div class="mc-platform">YouTube</div>
+      <div class="mc-number">1,500+</div>
+      <div class="mc-label">Subscribers</div>
+      <div class="mc-bar"><div class="mc-fill g" style="width:100%"></div></div>
+      <div class="mc-note">Channel monetised — revenue generating. Watch hours crossed 4,000 threshold April 2026.</div>
+      <div class="mc-date">As of June 2026</div>
+      <span class="badge g">✓ Monetised</span>
     </div>
-    <div class="stat-card">
-      <div class="stat-platform">YouTube</div>
-      <div class="stat-number">1,500+</div>
-      <div class="stat-label">Subscribers · Monetised ✓</div>
-      <div class="stat-bar"><div class="stat-fill" style="width:85%"></div></div>
-      <div class="stat-note">Channel monetised. Revenue generating. Subscribers growing past 1,500.</div>
-      <span class="badge green">✓ Monetised</span>
+    <div class="metric-card">
+      <div class="mc-platform">Spotify</div>
+      <div class="mc-number">~20K</div>
+      <div class="mc-label">Monthly Listeners</div>
+      <div class="mc-bar"><div class="mc-fill g" style="width:72%"></div></div>
+      <div class="mc-note">Surged from under 10K to 20K in one week during Feb 2026 ad campaign. Lyrics now syncing via Lyrics Blaster.</div>
+      <div class="mc-date">As of June 2026</div>
+      <span class="badge g">↑ Growing</span>
     </div>
-    <div class="stat-card">
-      <div class="stat-platform">Spotify</div>
-      <div class="stat-number">~20K</div>
-      <div class="stat-label">Monthly Listeners</div>
-      <div class="stat-bar"><div class="stat-fill green" style="width:72%"></div></div>
-      <div class="stat-note">Lyrics Blaster subscribed. Lyrics syncing. Playlisting and in-app Spotify/Apple Music promos to explore.</div>
-      <span class="badge green">↑ Growing</span>
+    <div class="metric-card">
+      <div class="mc-platform">Instagram</div>
+      <div class="mc-number">12K</div>
+      <div class="mc-label">Followers · 164 posts</div>
+      <div class="mc-bar"><div class="mc-fill" style="width:55%"></div></div>
+      <div class="mc-note">Short-form content and paid ads driving growth. Verification in progress. Target: 50K.</div>
+      <div class="mc-date">As of June 2026</div>
     </div>
-    <div class="stat-card">
-      <div class="stat-platform">TOWDAH · Quarterly</div>
-      <div class="stat-number">150</div>
-      <div class="stat-label">Sold out · ~150 capacity</div>
-      <div class="stat-bar"><div class="stat-fill green" style="width:100%"></div></div>
-      <div class="stat-note">Mailing list built from Eventbrite signups. Demand signal confirmed. Next: scale to 300+.</div>
-      <span class="badge green">✓ Sold Out</span>
-    </div>
-  </div>
-
-  <div class="g2" style="margin-bottom:28px;">
-    <div class="card">
-      <div class="card-title">Ad Spend Rates (Flora's Rates)</div>
-      <div class="card-body" style="margin-bottom:16px;">Active ad platform rates confirmed in January 2026. Running ₦5K/day on Facebook / IG and ₦3K/day on TikTok. Ads linked to YouTube full videos via profile links.</div>
-      <div class="rates-row">
-        <div class="rate-card"><div class="rate-platform">Facebook + IG</div><div class="rate-val">₦5K</div><div class="rate-sub">Per day</div></div>
-        <div class="rate-card"><div class="rate-platform">TikTok</div><div class="rate-val">₦3K</div><div class="rate-sub">Per day</div></div>
-        <div class="rate-card"><div class="rate-platform">YouTube</div><div class="rate-val">$10</div><div class="rate-sub">Per day (USD)</div></div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-title">Music Pipeline Status</div>
-      <div class="card-body">
-        <div style="margin-bottom:14px;"><div style="display:flex;justify-content:space-between;margin-bottom:5px;"><span><em>Pleroo</em></span><span style="color:#3d9e72;font-size:12px;">✓ Video Complete</span></div><div class="stat-bar"><div class="stat-fill green" style="width:100%"></div></div></div>
-        <div style="margin-bottom:14px;"><div style="display:flex;justify-content:space-between;margin-bottom:5px;"><span><em>Amen Hallelujah</em></span><span style="color:#3d9e72;font-size:12px;">✓ Video Complete</span></div><div class="stat-bar"><div class="stat-fill green" style="width:100%"></div></div></div>
-        <div style="margin-bottom:14px;"><div style="display:flex;justify-content:space-between;margin-bottom:5px;"><span><em>Responsible Father</em> (video)</span><span style="color:var(--violet);font-size:12px;">Released 16 June</span></div><div class="stat-bar"><div class="stat-fill" style="width:90%"></div></div></div>
-        <div style="margin-bottom:14px;"><div style="display:flex;justify-content:space-between;margin-bottom:5px;"><span><em>Abba's Beloved</em> — Song Story</span><span style="color:var(--violet);font-size:12px;">Live on YT</span></div><div class="stat-bar"><div class="stat-fill" style="width:85%"></div></div></div>
-        <div><div style="display:flex;justify-content:space-between;margin-bottom:5px;"><span><strong>Full Album Drop</strong></span><span style="color:var(--mauve);font-size:12px;font-weight:bold;">10 July 2026</span></div><div class="stat-bar"><div class="stat-fill" style="width:60%; background:var(--mauve)"></div></div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">Key Wins: Jan – June 2026</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px;">
-      <div style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--violet);font-size:16px;line-height:1.2;">✓</span><span style="font-size:13px;color:var(--text-mid);">TOWDAH April 2026 sold out at 150 — first ever live event, exceeded all expectations. Mailing list built from signups.</span></div>
-      <div style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--violet);font-size:16px;line-height:1.2;">✓</span><span style="font-size:13px;color:var(--text-mid);">Spotify surged from &lt;10K to ~20K followers in a week during ad campaign (Feb 2026).</span></div>
-      <div style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--violet);font-size:16px;line-height:1.2;">✓</span><span style="font-size:13px;color:var(--text-mid);">Opemipo Akinmola (Social Media Manager) hired and onboarded. Already building community strategy + content calendar.</span></div>
-      <div style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--violet);font-size:16px;line-height:1.2;">✓</span><span style="font-size:13px;color:var(--text-mid);">Pipeloluwa (Pipe) added to team as Creative Director + Producer — led Ignite 2026 production.</span></div>
-      <div style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--violet);font-size:16px;line-height:1.2;">✓</span><span style="font-size:13px;color:var(--text-mid);">YouTube watch hours crossed 4,000 threshold ahead of schedule (April 2026). YT subscribers at 1,500+/1000.</span></div>
-      <div style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--violet);font-size:16px;line-height:1.2;">✓</span><span style="font-size:13px;color:var(--text-mid);">Pleroo + Amen Hallelujah music videos completed by Mr. AY and Greenix (₦200K/video). Ready for premiere.</span></div>
-      <div style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--violet);font-size:16px;line-height:1.2;">✓</span><span style="font-size:13px;color:var(--text-mid);">Pneuma merch (shirts, caps, bottles, mugs, totes) launched. Shirts sold out at Ignite — demand exceeded supply. Hats a hit.</span></div>
-      <div style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--violet);font-size:16px;line-height:1.2;">✓</span><span style="font-size:13px;color:var(--text-mid);">Pneuma featured at Ignite 2026 — promotional video played, QR codes distributed, Pneuma announced to the full Zoe community.</span></div>
-      <div style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--violet);font-size:16px;line-height:1.2;">✓</span><span style="font-size:13px;color:var(--text-mid);">Covers recorded with PD featuring on 2 Pneuma songs — "Well Done" and others. Song Story series in production.</span></div>
-      <div style="display:flex;gap:12px;align-items:flex-start;"><span style="color:var(--violet);font-size:16px;line-height:1.2;">✓</span><span style="font-size:13px;color:var(--text-mid);">Lyrics Blaster subscribed (₦15/year). Lyrics going live across streaming platforms this week.</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- 04 CHALLENGES -->
-<section>
-  <p class="eyebrow">04 · Honest Assessment</p>
-  <h2 class="sec-title">The Challenges We Are Solving</h2>
-  <p class="sec-sub">Clear-eyed about what is holding us back — and what the strategy is built to address.</p>
-  <div class="ch-grid">
-    <div class="ch-card">
-      <div class="ch-icon">📡</div>
-      <div class="ch-title">Visibility & Reach</div>
-      <div class="ch-body">12K Instagram is a foundation, not a ceiling. Diaspora audience exists but is largely untapped. Spotify Nigeria pays a fraction of US/UK streaming rates — channel location and viewership in high-value markets is a core financial lever. Uzo (SEO) needs to be brought in once Opemipo is settled to build out discoverability infrastructure.</div>
-    </div>
-    <div class="ch-card">
-      <div class="ch-icon">📅</div>
-      <div class="ch-title">Consistency & Release Cadence</div>
-      <div class="ch-body">~2 years of unreleased live footage sits with Mr. AY. "Behind the Lyrics" series filmed but not published. Responsible Father video dropped without the team knowing — no coordinated release strategy. Album drops 10 July and a full video release schedule is still being built. Publishing must become a system, not an event.</div>
-    </div>
-    <div class="ch-card">
-      <div class="ch-icon">🎬</div>
-      <div class="ch-title">Production Capacity & Coordination</div>
-      <div class="ch-body">Mr. AY needs mastered audio files to match backlog videos — 4 songs awaiting handoff. Greenix editing at ₦200K/video is the right rate but pipeline management needs improvement. David Richman trained as DP but Mr. AY + Richman need to be formally aligned in a joint session. Church getting cameras for Ikeja/Ipaja — Pneuma will share in the interim.</div>
-    </div>
-    <div class="ch-card">
-      <div class="ch-icon">💰</div>
-      <div class="ch-title">Budget Authority & Disbursement</div>
-      <div class="ch-body">TOWDAH venue deposit (₦300K) nearly lost to another party due to approval delays. Budget is KJ/Kojo-gated — a structured quarterly disbursement process is needed. DistroKid still linked to Tolu's personal credit card. Yanmife's half-month salary and David Richman's TOWDAH fees still outstanding. No dedicated finance owner for Pneuma yet.</div>
-    </div>
-  </div>
-</section>
-
-<!-- 05 PILLARS -->
-<section class="alt">
-  <p class="eyebrow">05 · Foundation</p>
-  <h2 class="sec-title">Our Four Pillars</h2>
-  <p class="sec-sub">The structural commitments that hold the entire strategy together.</p>
-  <div class="pillar-row">
-    <div class="pillar"><div class="pillar-num">I</div><div class="pillar-title">Word-Rooted Worship</div><div class="pillar-body">Every song is a theological statement. Scripture and melody are integrated deliberately — not as decoration but as revelation. PMike emphasised sensitivity in songwriting. We see what we sing.</div></div>
-    <div class="pillar"><div class="pillar-num">II</div><div class="pillar-title">Production Excellence</div><div class="pillar-body">Technical quality serves spiritual encounter. Studio, trained DP, Greenix and Mr. AY — all of it exists so nothing stands between the listener and the presence of God. The Gbagada studio is Pneuma's permanent creative home.</div></div>
-    <div class="pillar"><div class="pillar-num">III</div><div class="pillar-title">Community & Culture</div><div class="pillar-body">TOWDAH is not an event — it is a culture. Sunday worship sets, mailing lists, global watch parties, campus media heads, diaspora nights. Opemipo is building the strategy to convert followers to fans.</div></div>
-    <div class="pillar"><div class="pillar-num">IV</div><div class="pillar-title">Sustainable Infrastructure</div><div class="pillar-body">SOPs, JDs, budgets, and a quarterly disbursement framework. A paid team with clear roles. Pneuma account, DistroKid independence, and a music business/royalties structure to build as we grow.</div></div>
-  </div>
-</section>
-
-<!-- 06 STRATEGY -->
-<section id="strategy">
-  <p class="eyebrow">06 · Strategic Plan</p>
-  <h2 class="sec-title">How We Get There</h2>
-  <p class="sec-sub">Four interlocking levers — each reinforcing the others, all grounded in decisions from the team across 5 months of weekly calls.</p>
-  <div>
-    <div class="strategy-item">
-      <div class="si-icon">🎵</div>
-      <div>
-        <div class="si-title">Consistent, High-Quality Releases</div>
-        <div class="si-body">Premiere Pleroo, then Amen Hallelujah — staggered to build anticipation (Beryl's Sunmisola model: teaser Monday, full video Friday). Coordinate global Zoe watch party for each (all branches + online cells via Zainab and campus media heads). Build out the full album video release schedule by 10 July. Cadence: 2 videos/month — one backlog, one new. Post lyrics to all songs immediately. Song Story series (Abba's Beloved, Pleroo, Friend & Partner) — use Airbnb for comfortable setting.</div>
-        <div class="si-tags"><span class="tag">Pleroo Premiere</span><span class="tag">Amen Hallelujah</span><span class="tag">Album — 10 July</span><span class="tag">Lyrics Online</span><span class="tag">Watch Parties</span><span class="tag">Song Story Series</span></div>
-      </div>
-    </div>
-    <div class="strategy-item">
-      <div class="si-icon">📣</div>
-      <div>
-        <div class="si-title">Targeted Investment — Ads & Studio</div>
-        <div class="si-body">Run paid ads on IG/Facebook and TikTok (not YouTube — worship as an ad looks odd). Target diaspora audiences (UK, US, Canada) by selecting US regions in ad targeting. Use Android devices for cost efficiency. Leverage Zoe ATL Instagram page for diaspora reach. Explore in-app Spotify and Apple Music promotions. Playlisting on all streaming platforms. Bring Uzo (SEO) in once Opemipo has settled to build discoverability. Pre-save campaigns for all future releases.</div>
-        <div class="si-tags"><span class="tag">IG/FB Ads</span><span class="tag">TikTok Ads</span><span class="tag">Diaspora Targeting</span><span class="tag">Spotify Playlisting</span><span class="tag">Uzo SEO</span><span class="tag">Pre-Save Campaigns</span></div>
-      </div>
-    </div>
-    <div class="strategy-item">
-      <div class="si-icon">🤝</div>
-      <div>
-        <div class="si-title">Hiring the Right Team</div>
-        <div class="si-body">Opemipo Akinmola (Social Media & Community Manager) is onboarded — already building community strategy and content calendar. Pipe (Pipeloluwa) joins as Creative Director and Producer. David Richman trained as DP/Production Manager — needs joint session with Mr. AY. Open roles remaining: Videographer/Editor (Greenix potential), Photographer. Song Compendium (lyrics, chords, meaning, scripture refs, credits) to build once team is settled. Komi Lasisi to call a full Pneuma team meeting — no more working in silos.</div>
-        <div class="si-tags"><span class="tag">Opemipo — Active</span><span class="tag">Pipe — New</span><span class="tag">David Richman — DP</span><span class="tag">Greenix — Videographer</span><span class="tag">Photographer — Open</span></div>
-      </div>
-    </div>
-    <div class="strategy-item">
-      <div class="si-icon">🎪</div>
-      <div>
-        <div class="si-title">TOWDAH — Events as Culture</div>
-        <div class="si-body">TOWDAH is the live worship recording event that creates content, community, and culture in one moment. April 2026 sold out at 150 — mailing list built. Cadence confirmed: last Saturday of every quarter. Next TOWDAH: scale to 300+ capacity. David Richman to independently produce future events. TOWDAH mailing list becomes our direct-to-fan email channel — use for pre-saves, watch party invites, album drops. Long-term: multi-city diaspora TOWDAH nights (Atlanta, Houston, London).</div>
-        <div class="si-tags"><span class="tag">Quarterly Cadence</span><span class="tag">TOWDAH SOP v1</span><span class="tag">Mailing List Active</span><span class="tag">Scale to 300+</span><span class="tag">Diaspora Nights</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 07 QUICK WINS -->
-<section class="alt">
-  <p class="eyebrow">07 · Targeted Interventions</p>
-  <h2 class="sec-title">Low-Hanging Fruit</h2>
-  <p class="sec-sub">Actions that build momentum with low cost and high impact — from the team's own playbook.</p>
-  <div class="qw-list">
-    <div class="qw-item"><div class="qw-check">✓</div><div class="qw-text">Sing one Pneuma song every Sunday at Zoe across all branches — turn the congregation into active promoters</div></div>
-    <div class="qw-item"><div class="qw-check">✓</div><div class="qw-text">Pneuma introduced at Ignite 2026 with QR codes + promo video — whole Zoe community now aware</div></div>
-    <div class="qw-item"><div class="qw-check">✓</div><div class="qw-text">Facebook ads run at ₦5K/day driving IG growth — linked to YouTube via profile. Ads targeted to US regions</div></div>
-    <div class="qw-item"><div class="qw-check">✓</div><div class="qw-text">Lyrics Blaster subscribed — lyrics syncing to Spotify and Apple Music this week</div></div>
-    <div class="qw-item"><div class="qw-check">✓</div><div class="qw-text">TOWDAH mailing list built from Eventbrite — direct email channel to 100 fans. Email already sent post-event</div></div>
-    <div class="qw-item"><div class="qw-check">✓</div><div class="qw-text">Global Zoe watch party model proven — used for Gathering of Believers, drove significant watch hours</div></div>
-    <div class="qw-item"><div class="qw-check pending">◯</div><div class="qw-text">Publish lyrics for all existing songs online — drives SEO, discoverability, and in-church adoption</div></div>
-    <div class="qw-item"><div class="qw-check pending">◯</div><div class="qw-text">Premiere Pleroo with global Zoe watch party — should push YouTube to 1K subscriber threshold</div></div>
-    <div class="qw-item"><div class="qw-check pending">◯</div><div class="qw-text">Mobilise campus media heads via Zainab for every new release — WhatsApp groups + local pages</div></div>
-    <div class="qw-item"><div class="qw-check pending">◯</div><div class="qw-text">Build Song Compendium — lyrics, guitar + piano chords, scripture refs, meaning, credits — for open access</div></div>
-    <div class="qw-item"><div class="qw-check pending">◯</div><div class="qw-text">Move Pneuma to its own bank account + structured quarterly budget disbursement</div></div>
-    <div class="qw-item"><div class="qw-check pending">◯</div><div class="qw-text">DistroKid card updated from Tolu's personal card to Pneuma account. Explore Spotify + Apple Music in-app promos</div></div>
-  </div>
-</section>
-
-<!-- 08 BUDGET -->
-<section id="budget">
-  <p class="eyebrow">08 · Budget Overview</p>
-  <h2 class="sec-title">Investment Framework</h2>
-  <p class="sec-sub">9-month framework in Nigerian Naira. Overall budget: ₦20M (major productions + ops). Ops team: ₦4M/year. Monthly Breakdown is the source of truth — Annual Overview pulls via formula links.</p>
-
-  <div class="g2" style="margin-bottom:28px;">
-    <div>
-      <div class="bb-item"><div class="bb-header"><span class="bb-label">People & Talent</span><span class="bb-val">Largest category · ₦4M ops/yr</span></div><div class="bb-track"><div class="bb-fill" style="width:85%"></div></div></div>
-      <div class="bb-item"><div class="bb-header"><span class="bb-label">Major Productions (TOWDAH)</span><span class="bb-val">Per event · see breakdown below</span></div><div class="bb-track"><div class="bb-fill" style="width:70%"></div></div></div>
-      <div class="bb-item"><div class="bb-header"><span class="bb-label">Studio Investment (Gbagada)</span><span class="bb-val">One-time + recurring</span></div><div class="bb-track"><div class="bb-fill" style="width:55%"></div></div></div>
-      <div class="bb-item"><div class="bb-header"><span class="bb-label">Ad Spend (FB, IG, TikTok)</span><span class="bb-val">Targeted campaigns</span></div><div class="bb-track"><div class="bb-fill" style="width:40%"></div></div></div>
-      <div class="bb-item"><div class="bb-header"><span class="bb-label">Content Generation</span><span class="bb-val">Video, photos, music</span></div><div class="bb-track"><div class="bb-fill" style="width:35%"></div></div></div>
-    </div>
-    <div class="card">
-      <div class="card-title">Revenue Model — Dual Scenario</div>
-      <div class="card-body">
-        <p style="margin-bottom:12px;"><strong style="color:var(--navy);">Nigeria-Heavy:</strong> Grows domestic streams and watch hours faster — easier to scale community, but streaming revenue per play is a fraction of US/UK rates. Channel location and ad types also differ.</p>
-        <p style="margin-bottom:12px;"><strong style="color:var(--navy);">Diaspora-Heavy:</strong> Target UK, US, Canada via ad region selection + Zoe ATL collaborations. Higher revenue per stream. Slower community build but the long-term financial flywheel.</p>
-        <p><strong style="color:var(--purple);">Strategic insight (from team discussion Feb 2026):</strong> Viewership location matters more than channel location for monetisation. Priority: grow viewership in high-value markets via targeted ads and diaspora network activation.</p>
-      </div>
+    <div class="metric-card">
+      <div class="mc-platform">TOWDAH · Live Event</div>
+      <div class="mc-number">150</div>
+      <div class="mc-label">Capacity · Sold Out · Quarterly</div>
+      <div class="mc-bar"><div class="mc-fill g" style="width:100%"></div></div>
+      <div class="mc-note">First event April 2026. Mailing list built from Eventbrite signups. Quarterly cadence confirmed.</div>
+      <div class="mc-date">April 2026 · Last Saturday of each quarter</div>
+      <span class="badge g">✓ Sold Out</span>
     </div>
   </div>
 
   <div class="g2">
     <div class="card">
-      <div class="card-title">TOWDAH April 2026 — Actual Budget</div>
-      <div class="card-body" style="margin-bottom:8px;">Discounted rates for first event. This sets the baseline for future TOWDAH budgeting. Venue nearly lost due to disbursement delays — a structural risk to fix.</div>
-      <table class="budget-table">
-        <thead><tr><th>Line Item</th><th>Amount (₦)</th></tr></thead>
-        <tbody>
-          <tr><td>Space / Venue</td><td>₦300,000</td></tr>
-          <tr><td>3 Cameras</td><td>₦141,000</td></tr>
-          <tr><td>Camera Operators</td><td>₦135,000</td></tr>
-          <tr><td>Photography</td><td>₦50,000</td></tr>
-          <tr><td>Rehearsals</td><td>₦100,000</td></tr>
-          <tr><td>Audio Post Production</td><td>₦100,000</td></tr>
-          <tr><td>Video Post Production</td><td>₦50,000</td></tr>
-          <tr><td><strong>Total (discounted)</strong></td><td><strong>₦875,000</strong></td></tr>
-        </tbody>
-      </table>
+      <div class="card-title">Music Catalogue — Release Status</div>
+      <div class="card-body">
+        <div style="margin-bottom:12px;"><div style="display:flex;justify-content:space-between;margin-bottom:4px;font-size:13px;"><span><em>Pleroo</em></span><span style="color:var(--green);">✓ Video Complete</span></div><div class="mc-bar"><div class="mc-fill g" style="width:100%"></div></div></div>
+        <div style="margin-bottom:12px;"><div style="display:flex;justify-content:space-between;margin-bottom:4px;font-size:13px;"><span><em>Amen Hallelujah</em></span><span style="color:var(--green);">✓ Video Complete</span></div><div class="mc-bar"><div class="mc-fill g" style="width:100%"></div></div></div>
+        <div style="margin-bottom:12px;"><div style="display:flex;justify-content:space-between;margin-bottom:4px;font-size:13px;"><span><em>Responsible Father</em></span><span style="color:var(--charcoal);">Released 16 June</span></div><div class="mc-bar"><div class="mc-fill" style="width:90%"></div></div></div>
+        <div style="margin-bottom:12px;"><div style="display:flex;justify-content:space-between;margin-bottom:4px;font-size:13px;"><span><em>Abba's Beloved</em> — Song Story</span><span style="color:var(--charcoal);">Live on YouTube</span></div><div class="mc-bar"><div class="mc-fill" style="width:80%"></div></div></div>
+        <div><div style="display:flex;justify-content:space-between;margin-bottom:4px;font-size:13px;font-weight:bold;"><span>Full Album Drop</span><span style="color:var(--gold);">10 July 2026</span></div><div class="mc-bar"><div class="mc-fill" style="width:55%;background:#7ab800;"></div></div></div>
+      </div>
     </div>
     <div class="card">
-      <div class="card-title">Merch Price List</div>
-      <div class="card-body" style="margin-bottom:16px;">Launched at Ignite 2026. Shirts sold out — demand exceeded supply. Note: only large + XL sizes available; smaller sizes needed for next run. People are wearing Pneuma merch everywhere.</div>
-      <div class="merch-grid" style="grid-template-columns:repeat(3,1fr);margin-top:8px;">
-        <div class="merch-card"><div class="merch-icon">👕</div><div class="merch-item">Stonewash Shirt</div><div class="merch-price">$30</div></div>
-        <div class="merch-card"><div class="merch-icon">🧢</div><div class="merch-item">Cap</div><div class="merch-price">$12</div></div>
-        <div class="merch-card"><div class="merch-icon">🍶</div><div class="merch-item">Bottle</div><div class="merch-price">$15</div></div>
-        <div class="merch-card"><div class="merch-icon">☕</div><div class="merch-item">Mug</div><div class="merch-price">$10</div></div>
-        <div class="merch-card"><div class="merch-icon">👜</div><div class="merch-item">Tote Bag</div><div class="merch-price">$10</div></div>
-        <div class="merch-card" style="background:var(--light-bg);"><div class="merch-icon">📦</div><div class="merch-item" style="font-size:11px;color:var(--text-muted);">Next Run: Add S/M/L sizes</div><div class="merch-price" style="font-size:14px;color:var(--text-muted);">TBD</div></div>
+      <div class="card-title">Key Wins · Jan–June 2026</div>
+      <div class="card-body" style="display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;gap:12px;font-size:13px;color:var(--text-mid);"><span style="color:var(--green);font-weight:bold;flex-shrink:0;">✓</span><span>TOWDAH April 2026 — sold out at 150, first ever live event</span></div>
+        <div style="display:flex;gap:12px;font-size:13px;color:var(--text-mid);"><span style="color:var(--green);font-weight:bold;flex-shrink:0;">✓</span><span>YouTube monetised — watch hours and subscriber thresholds both cleared</span></div>
+        <div style="display:flex;gap:12px;font-size:13px;color:var(--text-mid);"><span style="color:var(--green);font-weight:bold;flex-shrink:0;">✓</span><span>Spotify monthly listeners surged to ~20K in a single ad campaign week</span></div>
+        <div style="display:flex;gap:12px;font-size:13px;color:var(--text-mid);"><span style="color:var(--green);font-weight:bold;flex-shrink:0;">✓</span><span>Opemipo Akinmola (Social Media Manager) hired and onboarded</span></div>
+        <div style="display:flex;gap:12px;font-size:13px;color:var(--text-mid);"><span style="color:var(--green);font-weight:bold;flex-shrink:0;">✓</span><span>Pipeloluwa (Pipe) joins as Creative Director — led Ignite 2026 production</span></div>
+        <div style="display:flex;gap:12px;font-size:13px;color:var(--text-mid);"><span style="color:var(--green);font-weight:bold;flex-shrink:0;">✓</span><span>Merch launched at Ignite — shirts sold out, hats a hit</span></div>
+        <div style="display:flex;gap:12px;font-size:13px;color:var(--text-mid);"><span style="color:var(--green);font-weight:bold;flex-shrink:0;">✓</span><span>Pneuma announced to full Zoe community via Ignite 2026 promo video + QR codes</span></div>
+        <div style="display:flex;gap:12px;font-size:13px;color:var(--text-mid);"><span style="color:var(--green);font-weight:bold;flex-shrink:0;">✓</span><span>Lyrics Blaster subscribed — lyrics syncing to all streaming platforms</span></div>
       </div>
     </div>
   </div>
+</section>
 
-  <div class="budget-note" style="margin-top:24px;">
-    <strong>Immediate outstanding payments:</strong> Yanmife's half-month salary + David Richman's TOWDAH production fees. Both need resolution before next event. <strong>DistroKid</strong> still on Tolu's personal card — needs switching to Pneuma account. Kojo to propose finance resource/owner for Pneuma.
+<!-- 04 DATA INSIGHT -->
+<section>
+  <p class="eyebrow">04 · What the Data Is Telling Us</p>
+  <h2 class="sec-title">Reading the Evidence</h2>
+  <p class="sec-sub">The numbers point clearly. The opportunity is real and the demand is proven.</p>
+  <div class="insight-grid">
+    <ul class="insight-list">
+      <li><span class="bullet">→</span><span><strong>Organic demand is proven.</strong> TOWDAH sold out without paid promotion. Spotify listeners nearly doubled in one ad week. The audience exists — it is waiting to be reached.</span></li>
+      <li><span class="bullet">→</span><span><strong>Live worship is the strongest content format.</strong> Full live sessions consistently outperform standalone singles in watch time and shares. This is the product to build around.</span></li>
+      <li><span class="bullet">→</span><span><strong>Nigeria is the home base.</strong> Our primary community and adoption engine. Every branch, campus, and cell is an amplifier that has not yet been fully activated.</span></li>
+      <li><span class="bullet">→</span><span><strong>Diaspora growth must be cultivated intentionally.</strong> Atlanta, Houston, and London are high-value streaming markets. Spotify Nigeria pays a fraction of US/UK per-stream rates. Diaspora viewership is a financial lever, not just a reach goal.</span></li>
+      <li><span class="bullet">→</span><span><strong>Consistent releases and packaging are the biggest immediate opportunities.</strong> We have content. We have an audience. The gap is a reliable system for getting music out.</span></li>
+    </ul>
+    <div>
+      <div class="insight-bridge">"The sound is strong. The system around it is still being built."</div>
+      <div class="card" style="margin-top:20px;">
+        <div class="card-title">Platform Opportunity</div>
+        <div class="card-body">
+          <div style="margin-bottom:10px;font-size:13px;color:var(--text-mid);">Nigeria streaming rate vs. US/UK: <strong style="color:var(--dark);">10–20× gap per stream</strong></div>
+          <div style="margin-bottom:10px;font-size:13px;color:var(--text-mid);">Viewership location matters more than channel location for revenue</div>
+          <div style="font-size:13px;color:var(--text-mid);">Ad targeting set to US regions already driving diaspora discovery</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 GAPS -->
+<section class="alt">
+  <p class="eyebrow">05 · The Strategic Gaps</p>
+  <h2 class="sec-title">What We Are Solving</h2>
+  <p class="sec-sub">Four gaps stand between where we are and where we are going.</p>
+  <div class="gap-grid">
+    <div class="gap-card">
+      <div class="gap-label">Gap 01</div>
+      <div class="gap-title">Visibility</div>
+      <div class="gap-body">The music is not yet reaching enough of the potential audience. 12K Instagram and 20K Spotify listeners are proof of concept — not scale. Lyrics discoverability, SEO, and sustained paid promotion are largely untapped.</div>
+    </div>
+    <div class="gap-card">
+      <div class="gap-label">Gap 02</div>
+      <div class="gap-title">Consistency</div>
+      <div class="gap-body">Releases, social content, and campaigns are not yet predictable. ~2 years of backlog footage sits unused. The Responsible Father video dropped without team coordination. Publishing must become a system, not an event.</div>
+    </div>
+    <div class="gap-card">
+      <div class="gap-label">Gap 03</div>
+      <div class="gap-title">Production Quality Bar</div>
+      <div class="gap-body">Sound and video quality are strong but inconsistent. Thumbnails, captions, lyrics sync, and platform packaging need a defined quality standard. The creative direction role is the missing anchor.</div>
+    </div>
+    <div class="gap-card">
+      <div class="gap-label">Gap 04</div>
+      <div class="gap-title">Capacity & Infrastructure</div>
+      <div class="gap-body">Team, budget process, studio, finance structure, and role clarity are all still developing. The TOWDAH venue was nearly lost due to disbursement delays. These are structural risks that must be resolved before scale.</div>
+    </div>
+    <div class="gap-bridge">"The sound is strong. The system around it is still being built."</div>
+  </div>
+</section>
+
+<!-- 06 PILLARS -->
+<section>
+  <p class="eyebrow">06 · Four Growth Pillars</p>
+  <h2 class="sec-title">How We Organise Our Work</h2>
+  <p class="sec-sub">Four pillars covering everything Pneuma builds. Finance, SOPs, and admin live under enablers — not pillars.</p>
+  <div class="pillar-grid">
+    <div class="pillar">
+      <div class="pillar-num">I</div>
+      <div class="pillar-title">Worship Product</div>
+      <div class="pillar-body">The music, sessions, and stories that carry the Pneuma sound.</div>
+      <ul class="pillar-items">
+        <li>Live worship sessions</li>
+        <li>Albums and singles</li>
+        <li>Song Story series</li>
+        <li>TOWDAH recordings</li>
+        <li>Lyric videos + Song Compendium</li>
+      </ul>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">II</div>
+      <div class="pillar-title">Brand & Media Excellence</div>
+      <div class="pillar-body">How Pneuma looks, sounds, and shows up across every platform.</div>
+      <ul class="pillar-items">
+        <li>Creative direction (Pipe)</li>
+        <li>Visuals, thumbnails, captions</li>
+        <li>Production quality standard</li>
+        <li>Merch and brand identity</li>
+        <li>Photography and film</li>
+      </ul>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">III</div>
+      <div class="pillar-title">Distribution & Audience Growth</div>
+      <div class="pillar-body">Getting the music to the people it belongs to.</div>
+      <ul class="pillar-items">
+        <li>YouTube + Spotify + Apple Music</li>
+        <li>SEO (Uzo)</li>
+        <li>Paid ads — IG, FB, TikTok</li>
+        <li>Nigeria and diaspora targeting</li>
+        <li>Pre-save campaigns</li>
+      </ul>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">IV</div>
+      <div class="pillar-title">Community & Adoption</div>
+      <div class="pillar-body">Building the relationships that turn listeners into worshippers.</div>
+      <ul class="pillar-items">
+        <li>Zoe campuses + online cells</li>
+        <li>TOWDAH mailing list</li>
+        <li>Watch parties (Zainab + media heads)</li>
+        <li>Church adoption beyond Zoe</li>
+        <li>Collaborations + Ignite</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 07 STRATEGY CHOICES -->
+<section class="alt">
+  <p class="eyebrow">07 · Strategic Choices</p>
+  <h2 class="sec-title">How We Win</h2>
+  <p class="sec-sub">Strategy is as much about what we will not do as what we will. These are the team's explicit commitments.</p>
+  <div class="choices-block">
+    <div class="choice-col will">
+      <div class="choice-heading">We Will</div>
+      <ul class="choice-list">
+        <li><span>→</span>Build around live worship as our primary content format</li>
+        <li><span>→</span>Release consistently rather than wait for perfect moments</li>
+        <li><span>→</span>Grow Nigeria first while cultivating diaspora demand in parallel</li>
+        <li><span>→</span>Invest in creative and production excellence as a strategic priority</li>
+        <li><span>→</span>Use Zoe as a worship adoption and amplification engine</li>
+        <li><span>→</span>Treat TOWDAH as a flagship content, culture, and community platform</li>
+        <li><span>→</span>Stagger releases with teaser → full video cadence to build anticipation</li>
+        <li><span>→</span>Target diaspora in US regions via ad settings to grow high-value streaming</li>
+      </ul>
+    </div>
+    <div class="choice-col wont">
+      <div class="choice-heading">We Will Not</div>
+      <ul class="choice-list">
+        <li><span>✗</span>Pursue too many content formats at once without owning any of them</li>
+        <li><span>✗</span>Use paid ads to compensate for weak or unfinished content</li>
+        <li><span>✗</span>Produce one-off events without a documented release and follow-up plan</li>
+        <li><span>✗</span>Allow role ownership and content authority to remain unclear</li>
+        <li><span>✗</span>Release content without coordinated watch parties and team communication</li>
+        <li><span>✗</span>Continue with outstanding payments or unresolved finance structure</li>
+        <li><span>✗</span>Treat CCM as secondary to production — the song is always primary</li>
+        <li><span>✗</span>Mix strategy priorities with day-to-day admin in the same dashboard</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 08 PROGRESS -->
+<section>
+  <p class="eyebrow">08 · Progress & Current Priorities</p>
+  <h2 class="sec-title">Where the Work Stands</h2>
+  <p class="sec-sub">A clear picture of what is done, what is in motion, and what is next. Full action ownership lives in the <a href="tracker.html" style="color:var(--gold);">Execution Tracker →</a></p>
+  <div class="progress-grid">
+    <div class="prog-col">
+      <div class="prog-heading done">✓ Completed</div>
+      <ul class="prog-list">
+        <li><div class="prog-dot done"></div><span>YouTube monetisation threshold achieved (April 2026)</span></li>
+        <li><div class="prog-dot done"></div><span>TOWDAH April 2026 — sold out, mailing list built</span></li>
+        <li><div class="prog-dot done"></div><span>Pleroo + Amen Hallelujah videos completed (₦200K/video)</span></li>
+        <li><div class="prog-dot done"></div><span>Social Media Manager (Opemipo) hired and onboarded</span></li>
+        <li><div class="prog-dot done"></div><span>Creative Director (Pipe) joins — led Ignite 2026</span></li>
+        <li><div class="prog-dot done"></div><span>Merch launched — shirts sold out at Ignite</span></li>
+        <li><div class="prog-dot done"></div><span>Lyrics Blaster subscribed — lyrics syncing to platforms</span></li>
+        <li><div class="prog-dot done"></div><span>Pneuma introduced to full Zoe community at Ignite 2026</span></li>
+        <li><div class="prog-dot done"></div><span>Responsible Father video released 16 June 2026</span></li>
+      </ul>
+    </div>
+    <div class="prog-col">
+      <div class="prog-heading inprog">⟳ In Progress</div>
+      <ul class="prog-list">
+        <li><div class="prog-dot inprog"></div><span>Album release calendar — all songs, video dates, lyric videos</span></li>
+        <li><div class="prog-dot inprog"></div><span>Lyric videos for all album songs</span></li>
+        <li><div class="prog-dot inprog"></div><span>Lyrics sync across Spotify and Apple Music</span></li>
+        <li><div class="prog-dot inprog"></div><span>Opemipo content calendar and weekly cadence</span></li>
+        <li><div class="prog-dot inprog"></div><span>Finance structure and Pneuma bank account setup</span></li>
+        <li><div class="prog-dot inprog"></div><span>Song Story series filming (Abba's Beloved, Pleroo)</span></li>
+      </ul>
+    </div>
+    <div class="prog-col">
+      <div class="prog-heading next">◯ Next</div>
+      <ul class="prog-list">
+        <li><div class="prog-dot next"></div><span>Album drop 10 July — full coordinated campaign</span></li>
+        <li><div class="prog-dot next"></div><span>Paid ad campaign — IG/FB, TikTok, diaspora targeting</span></li>
+        <li><div class="prog-dot next"></div><span>Song Compendium — lyrics, chords, scripture refs</span></li>
+        <li><div class="prog-dot next"></div><span>Bring Uzo in for SEO once Opemipo settled</span></li>
+        <li><div class="prog-dot next"></div><span>TOWDAH Q3 — scale to 300+ capacity</span></li>
+        <li><div class="prog-dot next"></div><span>Music business structure — royalties, IP, legal</span></li>
+      </ul>
+    </div>
   </div>
 </section>
 
 <!-- 09 ROADMAP -->
 <section id="roadmap" class="alt">
-  <p class="eyebrow">09 · Roadmap</p>
-  <h2 class="sec-title">Next 3 Months to 1 Year</h2>
-  <p class="sec-sub">Phased execution — building the infrastructure, then scaling it, then going global. TOWDAH runs quarterly (last Saturday of each quarter).</p>
-  <div class="rm-header">
-    <div class="rm-phase"><div class="rm-phase-label">Now → Sept 2026</div><div class="rm-phase-title">Build & Launch</div></div>
-    <div class="rm-phase"><div class="rm-phase-label">Sept → Dec 2026</div><div class="rm-phase-title">Scale & Monetise</div></div>
-    <div class="rm-phase"><div class="rm-phase-label">2027</div><div class="rm-phase-title">Go Wide</div></div>
-  </div>
-  <div class="rm-cols">
-    <div class="rm-col">
-      <div class="rm-item"><div class="rm-dot"></div><div class="rm-item-text"><strong>10 July:</strong> Album drop — full video release schedule, lyric videos, coordinated watch parties</div></div>
-      <div class="rm-item"><div class="rm-dot"></div><div class="rm-item-text">Premiere Pleroo + Amen Hallelujah — global Zoe watch party, hit 1K YT subscribers</div></div>
-      <div class="rm-item"><div class="rm-dot"></div><div class="rm-item-text">Opemipo fully onboarded — weekly check-ins, content calendar, community building live</div></div>
-      <div class="rm-item"><div class="rm-dot"></div><div class="rm-item-text">Pipe + Mr. AY + David Richman aligned — first joint production session</div></div>
-      <div class="rm-item"><div class="rm-dot"></div><div class="rm-item-text">Lyrics + chords for all songs published + Song Compendium launched</div></div>
-      <div class="rm-item"><div class="rm-dot"></div><div class="rm-item-text">TOWDAH Q3 — scale to 300+ capacity, quarterly cadence established</div></div>
-      <div class="rm-item"><div class="rm-dot"></div><div class="rm-item-text">Pneuma bank account + quarterly disbursement structure in place</div></div>
+  <p class="eyebrow">09 · 12-Month Roadmap</p>
+  <h2 class="sec-title">Phased Execution</h2>
+  <p class="sec-sub">Three phases. Each builds on the last. TOWDAH runs quarterly — last Saturday of each quarter.</p>
+  <div class="roadmap">
+    <div class="rm-head">
+      <div class="rm-phase">
+        <div class="rm-phase-period">Now → September 2026</div>
+        <div class="rm-phase-title">Phase 1: Build & Launch</div>
+        <div class="rm-phase-outcome">Outcome: A complete release engine operating consistently</div>
+      </div>
+      <div class="rm-phase">
+        <div class="rm-phase-period">October → December 2026</div>
+        <div class="rm-phase-title">Phase 2: Strengthen & Expand</div>
+        <div class="rm-phase-outcome">Outcome: Audience growth is repeatable, not event-dependent</div>
+      </div>
+      <div class="rm-phase">
+        <div class="rm-phase-period">January → June 2027</div>
+        <div class="rm-phase-title">Phase 3: Scale & Sustain</div>
+        <div class="rm-phase-outcome">Outcome: Pneuma operates as a sustainable CCM collective with regional reach</div>
+      </div>
     </div>
-    <div class="rm-col">
-      <div class="rm-item"><div class="rm-dot"></div><div class="rm-item-text">YouTube monetisation active — generating consistent revenue</div></div>
-      <div class="rm-item"><div class="rm-dot"></div><div class="rm-item-text">Hire Photographer role. Finalise Greenix as Videographer/Editor on structure</div></div>
-      <div class="rm-item"><div class="rm-dot"></div><div class="rm-item-text">Bring Uzo in for SEO + platform optimisation once Opemipo is settled</div></div>
-      <div class="rm-item"><div class="rm-dot"></div><div class="rm-item-text">Music business structure: royalties, ownership, distribution, legal (Kemi + Komi Lasisi + Kojo)</div></div>
-      <div class="rm-item"><div class="rm-dot"></div><div class="rm-item-text">Instagram: reach 20K followers milestone</div></div>
-      <div class="rm-item"><div class="rm-dot"></div><div class="rm-item-text">TOWDAH Q4 — multi-city ambition begins. Pilot diaspora location (Houston or London)</div></div>
-      <div class="rm-item"><div class="rm-dot"></div><div class="rm-item-text">Update Media Playbook — Komi Lasisi leads, full Pneuma team review</div></div>
-    </div>
-    <div class="rm-col">
-      <div class="rm-item"><div class="rm-dot future"></div><div class="rm-item-text">Diaspora worship nights — Atlanta, Houston, London</div></div>
-      <div class="rm-item"><div class="rm-dot future"></div><div class="rm-item-text">Label partnership exploration — Integrity Music and equivalents</div></div>
-      <div class="rm-item"><div class="rm-dot future"></div><div class="rm-item-text">Songs adopted by congregations outside the Zoe network</div></div>
-      <div class="rm-item"><div class="rm-dot future"></div><div class="rm-item-text">Annual TOWDAH as flagship national Nigerian worship event</div></div>
-      <div class="rm-item"><div class="rm-dot future"></div><div class="rm-item-text">Wikipedia pages live — Pneuma, Zoe Household, Pastor Dolapo Lawal</div></div>
-      <div class="rm-item"><div class="rm-dot future"></div><div class="rm-item-text">Recognised as the definitive CCN voice for Nigerian worship</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- 10 LEADERSHIP ASKS -->
-<section class="dark">
-  <p class="eyebrow">10 · Leadership Asks</p>
-  <h2 class="sec-title">What We Need from PMike & PD</h2>
-  <p class="sec-sub">These are not requests — they are the enabling conditions for the strategy to work.</p>
-  <div class="la-grid">
-    <div class="la-card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);border-top-color:var(--mauve);">
-      <div class="la-icon">💵</div>
-      <div class="la-title" style="color:white;">Budget Approval + Quarterly Disbursement</div>
-      <div class="la-body" style="color:rgba(255,255,255,0.5);">Approve the 9-month framework. Establish a pre-approved quarterly pool for events + production that does not require individual approval per spend. The TOWDAH venue was nearly lost to another booking. This cannot happen again.</div>
-    </div>
-    <div class="la-card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);border-top-color:var(--mauve);">
-      <div class="la-icon">📣</div>
-      <div class="la-title" style="color:white;">Platform Access Within Zoe</div>
-      <div class="la-body" style="color:rgba(255,255,255,0.5);">Formally authorise one Pneuma song every Sunday across all branches. Enable Zainab and campus media heads to push content actively. Zoe ATL Instagram page to cross-promote for diaspora reach. The congregation is Pneuma's biggest untapped distribution network.</div>
-    </div>
-    <div class="la-card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);border-top-color:var(--mauve);">
-      <div class="la-icon">🏗️</div>
-      <div class="la-title" style="color:white;">Studio Build Sign-Off (Gbagada)</div>
-      <div class="la-body" style="color:rgba(255,255,255,0.5);">Confirm and resource the Gbagada studio conversion. One-time capital investment. Reduces long-term production costs and gives Pneuma a permanent creative home independent of hired studios.</div>
-    </div>
-    <div class="la-card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);border-top-color:var(--mauve);">
-      <div class="la-icon">👥</div>
-      <div class="la-title" style="color:white;">Hiring Authority + Outstanding Pay</div>
-      <div class="la-body" style="color:rgba(255,255,255,0.5);">Clear Yanmife's salary + David Richman's outstanding TOWDAH fees immediately. Approve Photographer as next open hire. JDs are documented and ready. Team cannot scale without roles filled.</div>
-    </div>
-    <div class="la-card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);border-top-color:var(--mauve);">
-      <div class="la-icon">🌍</div>
-      <div class="la-title" style="color:white;">Diaspora Network Access</div>
-      <div class="la-body" style="color:rgba(255,255,255,0.5);">Connect Pneuma formally with Zoe Atlanta, Houston, London communities for co-promotions and pilot diaspora TOWDAH nights. Fastest path to high-value streaming territory and a global audience.</div>
-    </div>
-    <div class="la-card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);border-top-color:var(--mauve);">
-      <div class="la-icon">🤝</div>
-      <div class="la-title" style="color:white;">Music Business + Label Conversations</div>
-      <div class="la-body" style="color:rgba(255,255,255,0.5);">As the catalogue grows, shape the royalties, ownership, distribution, and legal structure. Explore Integrity Music and equivalent partners. Leadership relationships open doors the strategy team cannot access alone. Kojo to own finding a finance resource for Pneuma.</div>
+    <div class="rm-body">
+      <div class="rm-col">
+        <div class="rm-item"><div class="rm-dot"></div><div class="rm-text"><strong>10 July:</strong> Album drop — full video calendar, lyric videos, global watch party</div></div>
+        <div class="rm-item"><div class="rm-dot"></div><div class="rm-text">Opemipo weekly cadence live — 2 videos + 1 carousel/week minimum</div></div>
+        <div class="rm-item"><div class="rm-dot"></div><div class="rm-text">Pipe + Mr. AY + David Richman first joint production session</div></div>
+        <div class="rm-item"><div class="rm-dot"></div><div class="rm-text">Song Compendium launched — lyrics, chords, scripture, credits</div></div>
+        <div class="rm-item"><div class="rm-dot"></div><div class="rm-text">TOWDAH Q3 — scale to 300+ capacity</div></div>
+        <div class="rm-item"><div class="rm-dot"></div><div class="rm-text">Pneuma bank account + quarterly finance disbursement in place</div></div>
+      </div>
+      <div class="rm-col">
+        <div class="rm-item"><div class="rm-dot"></div><div class="rm-text">Publish TOWDAH content — full video sessions from all quarterly events</div></div>
+        <div class="rm-item"><div class="rm-dot"></div><div class="rm-text">Paid ads active — IG/FB + TikTok, US region targeting, diaspora reach</div></div>
+        <div class="rm-item"><div class="rm-dot"></div><div class="rm-text">Uzo joins for SEO + streaming platform optimisation</div></div>
+        <div class="rm-item"><div class="rm-dot"></div><div class="rm-text">Greenix formalised as Videographer/Editor on retainer structure</div></div>
+        <div class="rm-item"><div class="rm-dot"></div><div class="rm-text">Music business structure — royalties, IP, legal (Kemi + Komi Lasisi + Kojo)</div></div>
+        <div class="rm-item"><div class="rm-dot"></div><div class="rm-text">TOWDAH Q4 — pilot diaspora location (Houston or London)</div></div>
+        <div class="rm-item"><div class="rm-dot"></div><div class="rm-text">Instagram: 20K followers milestone</div></div>
+      </div>
+      <div class="rm-col">
+        <div class="rm-item"><div class="rm-dot f"></div><div class="rm-text">Diaspora TOWDAH nights — Atlanta, Houston, London</div></div>
+        <div class="rm-item"><div class="rm-dot f"></div><div class="rm-text">Label partnership conversations — Integrity Music and equivalents</div></div>
+        <div class="rm-item"><div class="rm-dot f"></div><div class="rm-text">Songs adopted by congregations beyond the Zoe network</div></div>
+        <div class="rm-item"><div class="rm-dot f"></div><div class="rm-text">TOWDAH as an annual flagship Nigerian worship event</div></div>
+        <div class="rm-item"><div class="rm-dot f"></div><div class="rm-text">Revenue streams generating consistently — YouTube, streaming, merch, events</div></div>
+        <div class="rm-item"><div class="rm-dot f"></div><div class="rm-text">Wikipedia pages live — Pneuma, Zoe Household, Pastor Dolapo Lawal</div></div>
+        <div class="rm-item"><div class="rm-dot f"></div><div class="rm-text">Pneuma recognised as a defining CCM voice for Nigeria and Africa</div></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- 11 OPEN ACTION ITEMS -->
-<section id="actions">
-  <p class="eyebrow">11 · Open Action Items</p>
-  <h2 class="sec-title">What's On The List Right Now</h2>
-  <p class="sec-sub">As of June 2026 — directly from meeting notes and team messages.</p>
-  <div class="actions-list">
-    <div class="action-item urgent"><div class="action-owner">PMike · Urgent</div><div class="action-text">Build complete video release schedule for all album songs (Responsible Father, Worthy, For By Grace, Anchor, Victory Chant, etc.) with release dates ahead of 10 July album drop</div></div>
-    <div class="action-item urgent"><div class="action-owner">PMike · Urgent</div><div class="action-text">Coordinate lyric videos for all album songs — must be available by each song's release date. Also update DistroKid and sync lyrics across Spotify and Apple Music</div></div>
-    <div class="action-item urgent"><div class="action-owner">Kojo · Urgent</div><div class="action-text">Resolve budget path: finance resource/owner for Pneuma, payment process, clear Yanmife's salary + David Richman's outstanding TOWDAH fees</div></div>
-    <div class="action-item"><div class="action-owner">PMike + Opemipo</div><div class="action-text">Weekly check-in established. Content calendar for album releases confirmed. Content ownership and posting authority clarified</div></div>
-    <div class="action-item"><div class="action-owner">PMike</div><div class="action-text">Send mastered audio for all 4 remaining songs to Mr. AY to match backlog video footage</div></div>
-    <div class="action-item"><div class="action-owner">Kemi + Komi Lasisi + Kojo</div><div class="action-text">Outline next steps for music business structure — royalties, ownership, distribution, legal support</div></div>
-    <div class="action-item"><div class="action-owner">PMike + David Oguche + Exalted Jerry</div><div class="action-text">Develop content strategy with Opemipo for post-Ignite momentum. Creator account (songwriting insights, what worship is, why God is worthy)</div></div>
-    <div class="action-item"><div class="action-owner">Komi</div><div class="action-text">Call a full Pneuma team meeting — strategy team + worship + media. No more working in silos. Everyone knows their role</div></div>
-    <div class="action-item"><div class="action-owner">Frances + PMike</div><div class="action-text">"Behind the Lyrics" series: schedule sessions in comfortable setting (Airbnb). Priority: Abba's Beloved, Pleroo, Friend & Partner. Invite external co-writers</div></div>
-    <div class="action-item"><div class="action-owner">Kojo</div><div class="action-text">Merch next run planning: add S/M/L sizes, maintain permanent stock for sale. Pricing review (people commented on pricing)</div></div>
+<!-- 10 SUCCESS METRICS -->
+<section>
+  <p class="eyebrow">10 · How Success Will Be Measured</p>
+  <h2 class="sec-title">Our 12-Month Targets</h2>
+  <p class="sec-sub">Proposed KPIs based on current trajectory and strategic ambition. To be confirmed by the strategy team.</p>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-platform">YouTube</div>
+      <div class="kpi-row"><span class="kpi-metric">Subscribers (now: 1,500+)</span><span class="kpi-target">5,000</span></div>
+      <div class="kpi-row"><span class="kpi-metric">Monthly watch hours</span><span class="kpi-target">10,000 hrs</span></div>
+      <div class="kpi-row"><span class="kpi-metric">Videos published / month</span><span class="kpi-target">4–6</span></div>
+      <div class="kpi-row"><span class="kpi-metric">Revenue status</span><span class="kpi-target">Generating</span></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-platform">Spotify & Apple Music</div>
+      <div class="kpi-row"><span class="kpi-metric">Monthly listeners (now: ~20K)</span><span class="kpi-target">60,000</span></div>
+      <div class="kpi-row"><span class="kpi-metric">Playlists featuring Pneuma</span><span class="kpi-target">5+ editorial</span></div>
+      <div class="kpi-row"><span class="kpi-metric">Songs with synced lyrics</span><span class="kpi-target">100%</span></div>
+      <div class="kpi-row"><span class="kpi-metric">Diaspora listener share (US/UK)</span><span class="kpi-target">&gt; 30%</span></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-platform">Instagram & Social</div>
+      <div class="kpi-row"><span class="kpi-metric">Instagram followers (now: 12K)</span><span class="kpi-target">25,000</span></div>
+      <div class="kpi-row"><span class="kpi-metric">TikTok following</span><span class="kpi-target">5,000</span></div>
+      <div class="kpi-row"><span class="kpi-metric">Posts per week</span><span class="kpi-target">3–4</span></div>
+      <div class="kpi-row"><span class="kpi-metric">Verified account</span><span class="kpi-target">✓</span></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-platform">TOWDAH & Events</div>
+      <div class="kpi-row"><span class="kpi-metric">Events per year</span><span class="kpi-target">4 (quarterly)</span></div>
+      <div class="kpi-row"><span class="kpi-metric">Capacity (now: 150)</span><span class="kpi-target">300+</span></div>
+      <div class="kpi-row"><span class="kpi-metric">Mailing list size</span><span class="kpi-target">1,000+</span></div>
+      <div class="kpi-row"><span class="kpi-metric">Diaspora event pilot</span><span class="kpi-target">1 city</span></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-platform">Music & Releases</div>
+      <div class="kpi-row"><span class="kpi-metric">Album drop</span><span class="kpi-target">10 July 2026</span></div>
+      <div class="kpi-row"><span class="kpi-metric">Videos released / month</span><span class="kpi-target">2 minimum</span></div>
+      <div class="kpi-row"><span class="kpi-metric">Song Compendium live</span><span class="kpi-target">Q3 2026</span></div>
+      <div class="kpi-row"><span class="kpi-metric">Congregations adopting songs</span><span class="kpi-target">3+ beyond Zoe</span></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-platform">Team & Infrastructure</div>
+      <div class="kpi-row"><span class="kpi-metric">Greenix formalised as Videographer</span><span class="kpi-target">Q3 2026</span></div>
+      <div class="kpi-row"><span class="kpi-metric">Finance structure in place</span><span class="kpi-target">Q3 2026</span></div>
+      <div class="kpi-row"><span class="kpi-metric">Gbagada studio operational</span><span class="kpi-target">Q3 2026</span></div>
+      <div class="kpi-row"><span class="kpi-metric">IP / royalties structure</span><span class="kpi-target">Q4 2026</span></div>
+    </div>
   </div>
 </section>
 
-<!-- 12 TEAM -->
+<!-- 11 INVESTMENT -->
+<section id="budget" class="alt">
+  <p class="eyebrow">11 · Investment Framework</p>
+  <h2 class="sec-title">What It Will Cost</h2>
+  <p class="sec-sub">9-month budget framework in Nigerian Naira. Overall envelope: ₦20M. Ops team: ₦4M/year. Three strategic buckets — specific line items in the Execution Tracker.</p>
+  <div class="budget-grid">
+    <div class="budget-bucket">
+      <div class="bb-label">People & Creative Capability</div>
+      <div class="bb-desc">Salaries, creative fees, session musicians, production team. The largest spend and the most important.</div>
+      <div class="bb-track"><div class="bb-fill" style="width:85%"></div></div>
+      <div class="bb-status approved">Approved · ₦4M ops/yr</div>
+    </div>
+    <div class="budget-bucket">
+      <div class="bb-label">Production & Releases</div>
+      <div class="bb-desc">Video production (₦200K/video), studio conversion, recording, TOWDAH events, post-production.</div>
+      <div class="bb-track"><div class="bb-fill" style="width:70%"></div></div>
+      <div class="bb-status requested">Requires quarterly approval</div>
+    </div>
+    <div class="budget-bucket">
+      <div class="bb-label">Growth & Infrastructure</div>
+      <div class="bb-desc">Paid ads (₦5K/day FB/IG, ₦3K/day TikTok), SEO, Gbagada studio build, platform tools, merch stock.</div>
+      <div class="bb-track"><div class="bb-fill" style="width:50%"></div></div>
+      <div class="bb-status requested">Requires quarterly approval</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">TOWDAH April 2026 — Baseline Budget</div>
+    <div class="card-body" style="margin-bottom:16px;">Discounted rates for the first event. This is the baseline for future TOWDAH planning. Venue deposit (₦300K) was nearly lost due to disbursement delays — the quarterly pre-approval process must resolve this.</div>
+    <table class="budget-table">
+      <thead><tr><th>Line Item</th><th>Amount (₦)</th></tr></thead>
+      <tbody>
+        <tr><td>Space / Venue</td><td>₦300,000</td></tr>
+        <tr><td>3 Cameras</td><td>₦141,000</td></tr>
+        <tr><td>Camera Operators</td><td>₦135,000</td></tr>
+        <tr><td>Photography</td><td>₦50,000</td></tr>
+        <tr><td>Rehearsals</td><td>₦100,000</td></tr>
+        <tr><td>Audio Post Production</td><td>₦100,000</td></tr>
+        <tr><td>Video Post Production</td><td>₦50,000</td></tr>
+        <tr><td>Total (discounted first-event rate)</td><td>₦875,000</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 12 LEADERSHIP DECISIONS -->
+<section id="decisions" class="dark">
+  <p class="eyebrow">12 · Leadership Asks</p>
+  <h2 class="sec-title">Leadership Asks</h2>
+  <p class="sec-sub">The decisions that unlock the strategy. Each item requires a clear answer.</p>
+  <div class="decision-grid">
+    <div class="decision-card">
+      <div class="decision-num">Decision 01</div>
+      <div class="decision-title">Approve the Quarterly Budget Envelope</div>
+      <div class="decision-body">Confirm the 9-month ₦20M framework and establish a pre-approved quarterly pool for events and production that does not require individual line-item approval. The TOWDAH venue was nearly lost. This cannot happen again.</div>
+    </div>
+    <div class="decision-card">
+      <div class="decision-num">Decision 02</div>
+      <div class="decision-title">Confirm Finance Owner & Disbursement Process</div>
+      <div class="decision-body">Kojo to identify and appoint a dedicated finance resource for Pneuma. DistroKid must be moved from Tolu's personal card to a Pneuma account. Outstanding payments (Yanmife salary + David Richman TOWDAH fees) must be cleared.</div>
+    </div>
+    <div class="decision-card">
+      <div class="decision-num">Decision 03</div>
+      <div class="decision-title">Endorse the Album & Video Release Calendar</div>
+      <div class="decision-body">Approve the 10 July album drop and the full accompanying video release schedule. Confirm PMike's authority to execute the calendar in coordination with Opemipo and the creative team without per-release approval.</div>
+    </div>
+    <div class="decision-card">
+      <div class="decision-num">Decision 04</div>
+      <div class="decision-title">Authorise Church-Wide Adoption & Promotion</div>
+      <div class="decision-body">Formally authorise one Pneuma song every Sunday across all Zoe branches. Enable Zainab and campus media heads to actively push content. Activate Zoe ATL for diaspora cross-promotion. The congregation is our biggest untapped distribution network.</div>
+    </div>
+    <div class="decision-card">
+      <div class="decision-num">Decision 05</div>
+      <div class="decision-title">Confirm TOWDAH Frequency & Purpose</div>
+      <div class="decision-body">Formally confirm TOWDAH as a quarterly event (last Saturday of each quarter) and endorse scaling to 300+ capacity. Clarify TOWDAH's dual purpose: live worship recording and community building — not just a concert.</div>
+    </div>
+    <div class="decision-card">
+      <div class="decision-num">Decision 06</div>
+      <div class="decision-title">Approve Investment in Creative & Production Capability</div>
+      <div class="decision-body">Approve the Gbagada studio conversion, Photographer hire, and creative production spend (₦200K/video x 5). These are not optional extras — they are the foundation of a consistent release engine.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
 <section id="team" class="alt">
-  <p class="eyebrow">12 · The Team</p>
-  <h2 class="sec-title">Who Is Building This</h2>
-  <p class="sec-sub">Strategy, operations, creative, production, and community. Everyone knows their lane.</p>
+  <p class="eyebrow">13 · The Strategy Team</p>
+  <h2 class="sec-title">Who Is in the Room</h2>
+  <p class="sec-sub">The people responsible for building and executing this strategy.</p>
   <div class="team-grid">
-    <div class="tm-card"><div class="tm-avatar">K</div><div class="tm-name">Kemi O.</div><div class="tm-role">Lead Strategist / Group Lead</div><span class="tm-badge">Strategy</span></div>
-    <div class="tm-card"><div class="tm-avatar">PM</div><div class="tm-name">Pastor Michael Mosaku</div><div class="tm-role">Lead Pastor, Ikeja · Signing Authority</div><span class="tm-badge">Leadership</span></div>
-    <div class="tm-card"><div class="tm-avatar">F</div><div class="tm-name">Frances Mosaku</div><div class="tm-role">Worship Lead</div><span class="tm-badge">Creative</span></div>
-    <div class="tm-card"><div class="tm-avatar">Ko</div><div class="tm-name">Komi Lasisi</div><div class="tm-role">CEO, Zoe Household Strategy</div><span class="tm-badge">Leadership</span></div>
-    <div class="tm-card"><div class="tm-avatar">Pi</div><div class="tm-name">Pipeloluwa (Pipe)</div><div class="tm-role">Creative Director + Producer (Ignite 2026)</div><span class="tm-badge new">New · June 2026</span></div>
-    <div class="tm-card"><div class="tm-avatar">AY</div><div class="tm-name">Mr. AY</div><div class="tm-role">Media & AV Lead</div><span class="tm-badge">Production</span></div>
-    <div class="tm-card"><div class="tm-avatar">DR</div><div class="tm-name">David Richman</div><div class="tm-role">DP / Production Manager</div><span class="tm-badge">Production</span></div>
-    <div class="tm-card"><div class="tm-avatar">Op</div><div class="tm-name">Opemipo Akinmola</div><div class="tm-role">Social Media & Community Manager</div><span class="tm-badge new">Hired ✓</span></div>
-    <div class="tm-card"><div class="tm-avatar">B</div><div class="tm-name">Beryl</div><div class="tm-role">Strategy Team · Content + Creative</div><span class="tm-badge">Strategy</span></div>
-    <div class="tm-card"><div class="tm-avatar">Kj</div><div class="tm-name">Kojo</div><div class="tm-role">Finance / Budget Authority</div><span class="tm-badge">Finance</span></div>
-    <div class="tm-card"><div class="tm-avatar">Se</div><div class="tm-name">Seunfunmi Lasisi</div><div class="tm-role">Operations Support</div><span class="tm-badge">Ops</span></div>
-    <div class="tm-card"><div class="tm-avatar">+</div><div class="tm-name">Photographer</div><div class="tm-role">Role to be filled</div><span class="tm-badge open">Open Role</span></div>
+    <div class="tm-card"><div class="tm-av">K</div><div class="tm-name">Kemi O.</div><div class="tm-role">Lead Strategist / Group Lead</div><span class="tm-badge lead">Strategy Lead</span></div>
+    <div class="tm-card"><div class="tm-av">KL</div><div class="tm-name">Komi Lasisi</div><div class="tm-role">CEO, Zoe Household Strategy</div><span class="tm-badge lead">Leadership</span></div>
+    <div class="tm-card"><div class="tm-av">PM</div><div class="tm-name">Pastor Michael Mosaku</div><div class="tm-role">Lead Pastor, Ikeja · Signing Authority</div><span class="tm-badge lead">Leadership</span></div>
+    <div class="tm-card"><div class="tm-av">F</div><div class="tm-name">Frances Mosaku</div><div class="tm-role">Worship Lead</div><span class="tm-badge">Creative</span></div>
+    <div class="tm-card"><div class="tm-av">Pi</div><div class="tm-name">Pipeloluwa (Pipe)</div><div class="tm-role">Creative Director + Producer</div><span class="tm-badge new">New · June 2026</span></div>
+    <div class="tm-card"><div class="tm-av">AY</div><div class="tm-name">Mr. AY</div><div class="tm-role">Media & AV Lead</div><span class="tm-badge">Production</span></div>
+    <div class="tm-card"><div class="tm-av">DR</div><div class="tm-name">David Richman</div><div class="tm-role">DP / Production Manager</div><span class="tm-badge">Production</span></div>
+    <div class="tm-card"><div class="tm-av">Op</div><div class="tm-name">Opemipo Akinmola</div><div class="tm-role">Social Media & Community Manager</div><span class="tm-badge new">Hired ✓</span></div>
+    <div class="tm-card"><div class="tm-av">B</div><div class="tm-name">Beryl</div><div class="tm-role">Strategy · Content + Creative</div><span class="tm-badge">Strategy</span></div>
+    <div class="tm-card"><div class="tm-av">Kj</div><div class="tm-name">Kojo</div><div class="tm-role">Finance / Budget Authority</div><span class="tm-badge">Finance</span></div>
+    <div class="tm-card"><div class="tm-av">SL</div><div class="tm-name">Seunfunmi Lasisi</div><div class="tm-role">COO, Zoe Household</div><span class="tm-badge lead">Leadership</span></div>
   </div>
 </section>
 
 <footer>
-  <strong>Pneuma Worship Collective</strong> · Zoe Household Global · Lagos, Nigeria<br>
-  <span style="margin-top:6px;display:block;">Dashboard prepared June 2026 · Internal Strategy Use · PMike · PD · Strategy Team · linktr.ee/pneumaworship</span>
+  <strong>Pneuma Worship Collective</strong> · Zoe Household Global · Lagos, Nigeria · Atlanta · Houston · Abeokuta · London<br>
+  <span style="margin-top:6px;display:block;">Strategy Dashboard · June 2026 · Internal Use · <a href="tracker.html">Execution Tracker →</a> · linktr.ee/pneumaworship</span>
 </footer>
 
 </body>
